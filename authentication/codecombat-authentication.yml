@@ -1,0 +1,18 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/codecombat-openapi-original.yml
+docs: https://api-docs.codecombat.com/
+notes: >-
+  The CodeCombat Partner API authorizes every operation with HTTP Basic
+  authentication using a partner API key pair. OAuth2 in this API is a feature
+  for linking third-party SSO identities to users (add-oauth-identity /
+  login-oauth), not the API's own authorization mechanism.
+summary:
+  types:
+  - http
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/codecombat-openapi-original.yml

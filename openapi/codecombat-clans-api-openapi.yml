@@ -1,0 +1,78 @@
+openapi: 3.0.1
+info:
+  title: CodeCombat Auth Clans API
+  version: ''
+servers:
+- url: https://codecombat.com/api
+  description: default
+tags:
+- name: Clans
+paths:
+  clan/{handle}/members:
+    put:
+      description: Upserts a user into the clan.
+      operationId: ClansService.upsertMember
+      tags:
+      - Clans
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The clan with the member added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClanResponse'
+      summary: Upsert User Into Clan
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: The `_id` or `slug` of the user to add to the clan.
+              required:
+              - userId
+components:
+  schemas:
+    ClanResponse:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        displayName:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        type:
+          type: string
+        kind:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: {}
+    objectIdString:
+      type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

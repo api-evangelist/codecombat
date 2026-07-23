@@ -1,0 +1,98 @@
+openapi: 3.0.1
+info:
+  title: CodeCombat Auth Stats API
+  version: ''
+servers:
+- url: https://codecombat.com/api
+  description: default
+tags:
+- name: Stats
+paths:
+  playtime-stats:
+    get:
+      description: Returns the playtime stats
+      operationId: StatsService.getPlaytimeStats
+      tags:
+      - Stats
+      parameters:
+      - name: startDate
+        in: query
+        description: Earliest an included user was created
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: Latest an included user was created
+        required: false
+        schema:
+          type: string
+      - name: country
+        in: query
+        description: Filter by country string
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns the playtime stats accross all owned users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaytimeStatsResponse'
+      summary: Get Playtime Stats
+      security:
+      - BasicAuth: []
+  license-stats:
+    get:
+      description: Returns the license stats
+      operationId: StatsService.getLicenseStats
+      tags:
+      - Stats
+      parameters: []
+      responses:
+        '200':
+          description: Returns the license stats for classroom/home subscription licenses.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseStatsResponse'
+      summary: Get License Stats
+      security:
+      - BasicAuth: []
+components:
+  schemas:
+    PlaytimeStatsResponse:
+      type: object
+      properties:
+        playTime:
+          type: number
+          format: double
+          description: Total play time in seconds
+        gamesPlayed:
+          type: number
+          format: double
+          description: Number of levels played
+    LicenseStatsResponse:
+      type: object
+      properties:
+        licenseDaysGranted:
+          type: number
+          format: double
+          description: Total number of license days granted
+        licenseDaysUsed:
+          type: number
+          format: double
+          description: Number of license days used
+        licenseDaysRemaining:
+          type: number
+          format: double
+          description: Number of license days remaining
+        activeLicenses:
+          type: number
+          format: double
+          description: Number of active/valid licenses
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

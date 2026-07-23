@@ -1,0 +1,522 @@
+openapi: 3.0.1
+info:
+  title: CodeCombat Auth Users API
+  version: ''
+servers:
+- url: https://codecombat.com/api
+  description: default
+tags:
+- name: Users
+paths:
+  users:
+    post:
+      description: 'Creates a `User`.
+
+        '
+      operationId: UsersService.create
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: The created user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Create User
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                role:
+                  $ref: '#/components/schemas/UsersCreateRequestRole'
+                  description: '`"student"` or `"teacher"`. If unset, a home user will be created, unable to join classrooms.
+
+                    '
+                preferredLanguage:
+                  type: string
+                heroConfig:
+                  $ref: '#/components/schemas/UsersCreateRequestHeroConfig'
+                birthday:
+                  type: string
+              required:
+              - name
+              - email
+  users/{handle}:
+    get:
+      description: Returns a `User`.
+      operationId: UsersService.get
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      - name: includePlayTime
+        in: query
+        description: Set to non-empty string to include stats.playTime in response
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Get User
+      security:
+      - BasicAuth: []
+    put:
+      description: Modify name of a `User`
+      operationId: UsersService.update
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Update User
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Set to new name string
+                birthday:
+                  type: string
+                  description: Set the birthday
+              required:
+              - name
+  users/{handle}/classrooms:
+    get:
+      description: Returns a list of `Classrooms` this user is in (if a student) or owns (if a teacher).
+      operationId: UsersService.getClassrooms
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      - name: retMemberLimit
+        in: query
+        description: limit the return number of members for each classroom
+        required: false
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: The requested classrooms
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClassroomResponseWithCode'
+      summary: Get Classrooms By User
+      security:
+      - BasicAuth: []
+  users/{handle}/hero-config:
+    put:
+      description: Set the user's hero.
+      operationId: UsersService.setHero
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Get User Hero
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                thangType:
+                  $ref: '#/components/schemas/objectIdString'
+  users/{handle}/ace-config:
+    put:
+      description: Set the user's aceConfig (the settings for the in-game Ace code editor), such as whether to enable autocomplete.
+      operationId: UsersService.setAceConfig
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Put Ace Config
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                liveCompletion:
+                  type: boolean
+                  description: controls whether autocompletion snippets show up, the default value is true
+                behaviors:
+                  type: boolean
+                  description: controls whether things like automatic parenthesis and quote completion happens, the default value is false
+                language:
+                  type: string
+                  description: only for home users, should be one of ["python", "javascript", "cpp", "lua", "coffeescript"] right now
+  users/{handle}/subscription:
+    put:
+      description: 'Grants a user premium access to the "Home" version up to a certain time.
+
+        '
+      operationId: UsersService.grantPremiumSubscription
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Put Subscription
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ends:
+                  $ref: '#/components/schemas/datetimeString'
+              required:
+              - ends
+  users/{handle}/shorten-subscription:
+    put:
+      description: 'If the user already has a premium access up to a certain time, this shortens/revokes his/her premium access. If the ends is less than or equal to the current time, it revokes the subscription and sets the end date to be the current time, else it just shortens the subscription.
+
+        '
+      operationId: UsersService.shortenSubscription
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Shorten User Subscription
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ends:
+                  $ref: '#/components/schemas/datetimeString'
+              required:
+              - ends
+  users/{handle}/license:
+    put:
+      description: 'Grants a user access to the "Classroom" version up to a certain time.
+
+        Sets their role to "student".
+
+        '
+      operationId: UsersService.grantLicense
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Grant User License
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ends:
+                  $ref: '#/components/schemas/datetimeString'
+              required:
+              - ends
+  users/{handle}/shorten-license:
+    put:
+      description: 'If the user already has access to the "Classroom" version up to a certain time, this shortens/revokes his/her access. If the ends is less than or equal to the current time, it revokes the enrollment and sets the end date to be the current time, else it just shortens the enrollment.
+
+        '
+      operationId: UsersService.shortenLicense
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Shorten User License
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ends:
+                  $ref: '#/components/schemas/datetimeString'
+              required:
+              - ends
+  user-lookup/{property}/{value}:
+    get:
+      description: Redirects to `/users/{handle}` given a unique, identifying property
+      operationId: UsersService.lookup
+      tags:
+      - Users
+      parameters:
+      - name: property
+        in: path
+        description: The property to lookup by. May either be `"israel-id"` or `"name"`.
+        required: true
+        schema:
+          type: string
+      - name: value
+        in: path
+        description: The value to be looked up.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Search for User
+      security:
+      - BasicAuth: []
+components:
+  schemas:
+    UserResponseOAuthIdentitiesItem:
+      type: object
+      properties:
+        provider:
+          type: string
+        id:
+          type: string
+    UserResponseSubscription:
+      type: object
+      properties:
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
+    datetimeString:
+      type: string
+    UserResponse:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        email:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        role:
+          $ref: '#/components/schemas/roleString'
+        stats:
+          $ref: '#/components/schemas/UserResponseStats'
+        oAuthIdentities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponseOAuthIdentitiesItem'
+        subscription:
+          $ref: '#/components/schemas/UserResponseSubscription'
+        license:
+          $ref: '#/components/schemas/UserResponseLicense'
+    ClassroomResponseWithCode:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        code:
+          type: string
+        codeCamel:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
+        clanId:
+          $ref: '#/components/schemas/objectIdString'
+    UsersCreateRequestHeroConfig:
+      type: object
+      properties:
+        thangType:
+          $ref: '#/components/schemas/objectIdString'
+    UsersCreateRequestRole:
+      type: string
+      enum:
+      - student
+      - teacher
+      description: '`"student"` or `"teacher"`. If unset, a home user will be created, unable to join classrooms.
+
+        '
+    objectIdString:
+      type: string
+    roleString:
+      type: string
+      description: Usually either 'teacher' or 'student'
+    ClassroomResponseWithCodeCoursesItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        levels:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        instance_id:
+          $ref: '#/components/schemas/objectIdString'
+    UserResponseStats:
+      type: object
+      properties:
+        gamesCompleted:
+          type: number
+          format: double
+        concepts:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        playTime:
+          type: number
+          format: double
+          description: Included only when specifically requested on the endpoint
+    UserResponseLicense:
+      type: object
+      properties:
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

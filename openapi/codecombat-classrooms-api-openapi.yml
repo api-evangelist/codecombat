@@ -1,0 +1,490 @@
+openapi: 3.0.1
+info:
+  title: CodeCombat Auth Classrooms API
+  version: ''
+servers:
+- url: https://codecombat.com/api
+  description: default
+tags:
+- name: Classrooms
+paths:
+  classrooms:
+    get:
+      description: Returns the classroom details for a class code.
+      operationId: ClassroomsService.get
+      tags:
+      - Classrooms
+      parameters:
+      - name: code
+        in: query
+        description: The classroom's `code`.
+        required: true
+        schema:
+          type: string
+      - name: retMemberLimit
+        in: query
+        description: limit the return number of members for the classroom
+        required: false
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: The classroom details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponseWithCode'
+      summary: Get Classroom Details
+      security:
+      - BasicAuth: []
+    post:
+      description: Creates a new empty `Classroom`.
+      operationId: ClassroomsService.create
+      tags:
+      - Classrooms
+      parameters: []
+      responses:
+        '200':
+          description: The created classroom
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponseWithCode'
+      summary: Create a classroom
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the classroom
+                ownerID:
+                  $ref: '#/components/schemas/objectIdString'
+                aceConfig:
+                  $ref: '#/components/schemas/ClassroomsCreateRequestAceConfig'
+              required:
+              - name
+              - ownerID
+              - aceConfig
+  classrooms/{handle}/members:
+    put:
+      description: Upserts a user into the classroom.
+      operationId: ClassroomsService.upsertMember
+      tags:
+      - Classrooms
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The classroom with the member added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponse'
+      summary: Upsert a user from classroom
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: The code for joining this classroom
+                userId:
+                  type: string
+                  description: The `_id` or `slug` of the user to add to the class.
+                retMemberLimit:
+                  type: number
+                  format: double
+                  description: limit the return number of members for the classroom, the default value is 1000
+              required:
+              - code
+              - userId
+    delete:
+      description: Remove a user from the classroom.
+      operationId: ClassroomsService.removeMember
+      tags:
+      - Classrooms
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The classroom with the member removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponse'
+      summary: Delete User from Classroom
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: The `_id` or `slug` of the user to remove from the class.
+                retMemberLimit:
+                  type: number
+                  format: double
+                  description: limit the return number of members for the classroom, the default value is 1000
+              required:
+              - userId
+  classrooms/{classroomHandle}/courses/{courseHandle}/enrolled:
+    put:
+      description: 'Enrolls a user in a course in a classroom.
+
+        If the course is paid, user must have an active license.
+
+        User must be a member of the classroom.
+
+        '
+      operationId: ClassroomsService.enrollUserInCourse
+      tags:
+      - Classrooms
+      parameters:
+      - name: classroomHandle
+        in: path
+        description: The classroom's `_id`.
+        required: true
+        schema:
+          type: string
+      - name: courseHandle
+        in: path
+        description: The course's `_id`.
+        required: true
+        schema:
+          type: string
+      - name: retMemberLimit
+        in: query
+        description: limit the return number of members for the classroom, the default value is 1000
+        required: false
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: The classroom with the user enrolled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponse'
+      summary: Enroll User in a Course
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  $ref: '#/components/schemas/objectIdString'
+              required:
+              - userId
+  classrooms/{classroomHandle}/courses/{courseHandle}/remove-enrolled:
+    put:
+      description: 'Removes an enrolled user from a course in a classroom.
+
+        '
+      operationId: ClassroomsService.removeEnrolledUser
+      tags:
+      - Classrooms
+      parameters:
+      - name: classroomHandle
+        in: path
+        description: The classroom's `_id`.
+        required: true
+        schema:
+          type: string
+      - name: courseHandle
+        in: path
+        description: The course's `_id`.
+        required: true
+        schema:
+          type: string
+      - name: retMemberLimit
+        in: query
+        description: limit the return number of members for the classroom, the default value is 1000
+        required: false
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: The classroom with the user removed from the course.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponse'
+      summary: Remove User from a classroom
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  $ref: '#/components/schemas/objectIdString'
+              required:
+              - userId
+  classrooms/{classroomHandle}/stats:
+    get:
+      description: 'Returns a list of all members stats for the classroom.
+
+        '
+      operationId: ClassroomsService.getMembersStats
+      tags:
+      - Classrooms
+      parameters:
+      - name: classroomHandle
+        in: path
+        description: The classroom's `_id`.
+        required: true
+        schema:
+          type: string
+      - name: project
+        in: query
+        description: 'If specified, include only the specified projection of returned stats; else, return all stats. Format as a comma-separated list, like `creator,playtime,state.complete`.
+
+          '
+        required: false
+        schema:
+          type: string
+      - name: memberLimit
+        in: query
+        description: Limit the return member number. the default value is 10, and the max value is 100
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: memberSkip
+        in: query
+        description: 'Skip the members that doesn''t need to return, for pagination
+
+          '
+        required: false
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: The members stats for the classroom.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItem'
+      summary: Get Member Stats
+      security:
+      - BasicAuth: []
+  classrooms/{classroomHandle}/members/{memberHandle}/sessions:
+    get:
+      description: 'Returns a list of all levels played by the user for the classroom.
+
+        '
+      operationId: ClassroomsService.getLevelsPlayed
+      tags:
+      - Classrooms
+      parameters:
+      - name: classroomHandle
+        in: path
+        description: The classroom's `_id`.
+        required: true
+        schema:
+          type: string
+      - name: memberHandle
+        in: path
+        description: The classroom member's `_id`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The classroom with the user enrolled.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LevelSessionResponse'
+      summary: Get Level Session
+      security:
+      - BasicAuth: []
+components:
+  schemas:
+    datetimeString:
+      type: string
+    ClassroomResponseWithCodeCoursesItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        levels:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        instance_id:
+          $ref: '#/components/schemas/objectIdString'
+    LevelSessionResponseLevel:
+      type: object
+      properties:
+        original:
+          type: string
+          description: The id for the level.
+    ClassroomResponseWithCode:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        code:
+          type: string
+        codeCamel:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
+        clanId:
+          $ref: '#/components/schemas/objectIdString'
+    ClassroomsGetMembersStatsResponseItemStats:
+      type: object
+      properties:
+        gamesCompleted:
+          type: number
+          format: double
+        playtime:
+          type: number
+          format: double
+          description: Total play time in seconds
+    LevelSessionResponse:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/LevelSessionResponseState'
+        level:
+          $ref: '#/components/schemas/LevelSessionResponseLevel'
+        levelID:
+          type: string
+          description: Level slug like `wakka-maul`
+        creator:
+          $ref: '#/components/schemas/objectIdString'
+        playtime:
+          type: integer
+          description: Time played in seconds.
+        changed:
+          $ref: '#/components/schemas/datetimeString'
+        created:
+          $ref: '#/components/schemas/datetimeString'
+        dateFirstCompleted:
+          $ref: '#/components/schemas/datetimeString'
+        submitted:
+          type: boolean
+          description: For arenas. Whether or not the level has been added to the ladder.
+        published:
+          type: boolean
+          description: For shareable projects. Whether or not the project has been shared with classmates.
+    ClassroomsGetMembersStatsResponseItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        stats:
+          $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItemStats'
+    LevelSessionResponseState:
+      type: object
+      properties:
+        complete:
+          type: boolean
+    objectIdString:
+      type: string
+    ClassroomResponse:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseCoursesItem'
+    ClassroomResponseCoursesItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        levels:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        instance_id:
+          $ref: '#/components/schemas/objectIdString'
+    ClassroomsCreateRequestAceConfig:
+      type: object
+      properties:
+        language:
+          type: string
+          description: Programming language for the classroom
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

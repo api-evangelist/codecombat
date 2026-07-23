@@ -1,0 +1,60 @@
+openapi: 3.0.1
+info:
+  title: CodeCombat Auth API
+  version: ''
+servers:
+- url: https://codecombat.com/api
+  description: default
+tags:
+- name: Auth
+paths:
+  auth/login-o-auth:
+    get:
+      description: 'Logs a user in. In this example, we call your lookup URL (let''s say, `https://oauth.provider/user?t=<%= accessToken %>`) with the access token (`1234`). The lookup URL returns `{ id: ''abcd'' }` in this case. We will match this `id` with the OAuthIdentity stored in the user information in our db. If everything checks out, the user is logged in and redirected to the home page.
+
+        '
+      operationId: AuthService.loginOauth
+      tags:
+      - Auth
+      parameters:
+      - name: provider
+        in: query
+        description: Your OAuth Provider ID
+        required: true
+        schema:
+          type: string
+      - name: accessToken
+        in: query
+        description: Will be passed through your lookup URL to get the user ID. Required if no `code`.
+        required: false
+        schema:
+          type: string
+      - name: code
+        in: query
+        description: Will be passed to the OAuth token endpoint to get a token. Required if no `accessToken`.
+        required: false
+        schema:
+          type: string
+      - name: redirect
+        in: query
+        description: Override where the user will navigate to after successfully logging in.
+        required: false
+        schema:
+          type: string
+      - name: errorRedirect
+        in: query
+        description: If an error happens, redirects the user to this url, with at least query parameters `code`, `errorName` and `message`.
+        required: false
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Login User
+      security:
+      - BasicAuth: []
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

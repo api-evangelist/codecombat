@@ -1,0 +1,1197 @@
+openapi: 3.0.1
+info:
+  title: CodeCombat API
+  version: ''
+paths:
+  users/{handle}/o-auth-identities:
+    post:
+      description: >
+        Adds an OAuth2 identity to the user, so that they can be logged in with
+        that identity. You need to send the OAuth code or the access token to
+        this endpoint. 1. If no access token is provided, it will use your
+        OAuth2 token URL to exchange the given code for an access token. 2. Then
+        it will use the access token (given by you, or received from step 1) to
+        look up the user on your service using the lookup URL, and expects a
+        JSON object in response with an `id` property. 3. It will then save that
+        user `id` to the user in our db as a new OAuthIdentity. In this example,
+        we call your lookup URL (let's say, `https://oauth.provider/user?t=<%=
+        accessToken %>`) with the access token (`1234`). The lookup URL returns
+        `{ id: 'abcd' }` in this case, which we save to the user in our db.
+      operationId: Service.postUsersHandleOAuthIdentities
+      tags:
+        - ''
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Add Oauth2 Identity
+      security: &ref_0
+        - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider:
+                  type: string
+                  description: Your OAuth Provider ID.
+                accessToken:
+                  type: string
+                  description: >-
+                    Will be passed through your lookup URL to get the user ID.
+                    Required if no `code`.
+                code:
+                  type: string
+                  description: >-
+                    Will be passed to the OAuth token endpoint to get a token.
+                    Required if no `accessToken`.
+              required:
+                - provider
+  auth/login-o-auth:
+    get:
+      description: >
+        Logs a user in. In this example, we call your lookup URL (let's say,
+        `https://oauth.provider/user?t=<%= accessToken %>`) with the access
+        token (`1234`). The lookup URL returns `{ id: 'abcd' }` in this case. We
+        will match this `id` with the OAuthIdentity stored in the user
+        information in our db. If everything checks out, the user is logged in
+        and redirected to the home page.
+      operationId: AuthService.loginOauth
+      tags:
+        - Auth
+      parameters:
+        - name: provider
+          in: query
+          description: Your OAuth Provider ID
+          required: true
+          schema:
+            type: string
+        - name: accessToken
+          in: query
+          description: >-
+            Will be passed through your lookup URL to get the user ID. Required
+            if no `code`.
+          required: false
+          schema:
+            type: string
+        - name: code
+          in: query
+          description: >-
+            Will be passed to the OAuth token endpoint to get a token. Required
+            if no `accessToken`.
+          required: false
+          schema:
+            type: string
+        - name: redirect
+          in: query
+          description: >-
+            Override where the user will navigate to after successfully logging
+            in.
+          required: false
+          schema:
+            type: string
+        - name: errorRedirect
+          in: query
+          description: >-
+            If an error happens, redirects the user to this url, with at least
+            query parameters `code`, `errorName` and `message`.
+          required: false
+          schema:
+            type: string
+      responses:
+        '204':
+          description: ''
+      summary: Login User
+      security: *ref_0
+  clan/{handle}/members:
+    put:
+      description: Upserts a user into the clan.
+      operationId: ClansService.upsertMember
+      tags:
+        - Clans
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The clan with the member added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClanResponse'
+      summary: Upsert User Into Clan
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: The `_id` or `slug` of the user to add to the clan.
+              required:
+                - userId
+  classrooms:
+    get:
+      description: Returns the classroom details for a class code.
+      operationId: ClassroomsService.get
+      tags:
+        - Classrooms
+      parameters:
+        - name: code
+          in: query
+          description: The classroom's `code`.
+          required: true
+          schema:
+            type: string
+        - name: retMemberLimit
+          in: query
+          description: limit the return number of members for the classroom
+          required: false
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: The classroom details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponseWithCode'
+      summary: Get Classroom Details
+      security: *ref_0
+    post:
+      description: Creates a new empty `Classroom`.
+      operationId: ClassroomsService.create
+      tags:
+        - Classrooms
+      parameters: []
+      responses:
+        '200':
+          description: The created classroom
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponseWithCode'
+      summary: Create a classroom
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the classroom
+                ownerID:
+                  $ref: '#/components/schemas/objectIdString'
+                aceConfig:
+                  $ref: '#/components/schemas/ClassroomsCreateRequestAceConfig'
+              required:
+                - name
+                - ownerID
+                - aceConfig
+  classrooms/{handle}/members:
+    put:
+      description: Upserts a user into the classroom.
+      operationId: ClassroomsService.upsertMember
+      tags:
+        - Classrooms
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The classroom with the member added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponse'
+      summary: Upsert a user from classroom
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: The code for joining this classroom
+                userId:
+                  type: string
+                  description: The `_id` or `slug` of the user to add to the class.
+                retMemberLimit:
+                  type: number
+                  format: double
+                  description: >-
+                    limit the return number of members for the classroom, the
+                    default value is 1000
+              required:
+                - code
+                - userId
+    delete:
+      description: Remove a user from the classroom.
+      operationId: ClassroomsService.removeMember
+      tags:
+        - Classrooms
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The classroom with the member removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponse'
+      summary: Delete User from Classroom
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: The `_id` or `slug` of the user to remove from the class.
+                retMemberLimit:
+                  type: number
+                  format: double
+                  description: >-
+                    limit the return number of members for the classroom, the
+                    default value is 1000
+              required:
+                - userId
+  classrooms/{classroomHandle}/courses/{courseHandle}/enrolled:
+    put:
+      description: |
+        Enrolls a user in a course in a classroom.
+        If the course is paid, user must have an active license.
+        User must be a member of the classroom.
+      operationId: ClassroomsService.enrollUserInCourse
+      tags:
+        - Classrooms
+      parameters:
+        - name: classroomHandle
+          in: path
+          description: The classroom's `_id`.
+          required: true
+          schema:
+            type: string
+        - name: courseHandle
+          in: path
+          description: The course's `_id`.
+          required: true
+          schema:
+            type: string
+        - name: retMemberLimit
+          in: query
+          description: >-
+            limit the return number of members for the classroom, the default
+            value is 1000
+          required: false
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: The classroom with the user enrolled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponse'
+      summary: Enroll User in a Course
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  $ref: '#/components/schemas/objectIdString'
+              required:
+                - userId
+  classrooms/{classroomHandle}/courses/{courseHandle}/remove-enrolled:
+    put:
+      description: |
+        Removes an enrolled user from a course in a classroom.
+      operationId: ClassroomsService.removeEnrolledUser
+      tags:
+        - Classrooms
+      parameters:
+        - name: classroomHandle
+          in: path
+          description: The classroom's `_id`.
+          required: true
+          schema:
+            type: string
+        - name: courseHandle
+          in: path
+          description: The course's `_id`.
+          required: true
+          schema:
+            type: string
+        - name: retMemberLimit
+          in: query
+          description: >-
+            limit the return number of members for the classroom, the default
+            value is 1000
+          required: false
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: The classroom with the user removed from the course.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassroomResponse'
+      summary: Remove User from a classroom
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  $ref: '#/components/schemas/objectIdString'
+              required:
+                - userId
+  classrooms/{classroomHandle}/stats:
+    get:
+      description: |
+        Returns a list of all members stats for the classroom.
+      operationId: ClassroomsService.getMembersStats
+      tags:
+        - Classrooms
+      parameters:
+        - name: classroomHandle
+          in: path
+          description: The classroom's `_id`.
+          required: true
+          schema:
+            type: string
+        - name: project
+          in: query
+          description: >
+            If specified, include only the specified projection of returned
+            stats; else, return all stats. Format as a comma-separated list,
+            like `creator,playtime,state.complete`.
+          required: false
+          schema:
+            type: string
+        - name: memberLimit
+          in: query
+          description: >-
+            Limit the return member number. the default value is 10, and the max
+            value is 100
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: memberSkip
+          in: query
+          description: |
+            Skip the members that doesn't need to return, for pagination
+          required: false
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: The members stats for the classroom.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItem'
+      summary: Get Member Stats
+      security: *ref_0
+  classrooms/{classroomHandle}/members/{memberHandle}/sessions:
+    get:
+      description: |
+        Returns a list of all levels played by the user for the classroom.
+      operationId: ClassroomsService.getLevelsPlayed
+      tags:
+        - Classrooms
+      parameters:
+        - name: classroomHandle
+          in: path
+          description: The classroom's `_id`.
+          required: true
+          schema:
+            type: string
+        - name: memberHandle
+          in: path
+          description: The classroom member's `_id`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The classroom with the user enrolled.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LevelSessionResponse'
+      summary: Get Level Session
+      security: *ref_0
+  playtime-stats:
+    get:
+      description: Returns the playtime stats
+      operationId: StatsService.getPlaytimeStats
+      tags:
+        - Stats
+      parameters:
+        - name: startDate
+          in: query
+          description: Earliest an included user was created
+          required: false
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          description: Latest an included user was created
+          required: false
+          schema:
+            type: string
+        - name: country
+          in: query
+          description: Filter by country string
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns the playtime stats accross all owned users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaytimeStatsResponse'
+      summary: Get Playtime Stats
+      security: *ref_0
+  license-stats:
+    get:
+      description: Returns the license stats
+      operationId: StatsService.getLicenseStats
+      tags:
+        - Stats
+      parameters: []
+      responses:
+        '200':
+          description: Returns the license stats for classroom/home subscription licenses.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseStatsResponse'
+      summary: Get License Stats
+      security: *ref_0
+  users:
+    post:
+      description: |
+        Creates a `User`.
+      operationId: UsersService.create
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: The created user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Create User
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                role:
+                  $ref: '#/components/schemas/UsersCreateRequestRole'
+                  description: >
+                    `"student"` or `"teacher"`. If unset, a home user will be
+                    created, unable to join classrooms.
+                preferredLanguage:
+                  type: string
+                heroConfig:
+                  $ref: '#/components/schemas/UsersCreateRequestHeroConfig'
+                birthday:
+                  type: string
+              required:
+                - name
+                - email
+  users/{handle}:
+    get:
+      description: Returns a `User`.
+      operationId: UsersService.get
+      tags:
+        - Users
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+        - name: includePlayTime
+          in: query
+          description: Set to non-empty string to include stats.playTime in response
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Get User
+      security: *ref_0
+    put:
+      description: Modify name of a `User`
+      operationId: UsersService.update
+      tags:
+        - Users
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Update User
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Set to new name string
+                birthday:
+                  type: string
+                  description: Set the birthday
+              required:
+                - name
+  users/{handle}/classrooms:
+    get:
+      description: >-
+        Returns a list of `Classrooms` this user is in (if a student) or owns
+        (if a teacher).
+      operationId: UsersService.getClassrooms
+      tags:
+        - Users
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+        - name: retMemberLimit
+          in: query
+          description: limit the return number of members for each classroom
+          required: false
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: The requested classrooms
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClassroomResponseWithCode'
+      summary: Get Classrooms By User
+      security: *ref_0
+  users/{handle}/hero-config:
+    put:
+      description: Set the user's hero.
+      operationId: UsersService.setHero
+      tags:
+        - Users
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Get User Hero
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                thangType:
+                  $ref: '#/components/schemas/objectIdString'
+  users/{handle}/ace-config:
+    put:
+      description: >-
+        Set the user's aceConfig (the settings for the in-game Ace code editor),
+        such as whether to enable autocomplete.
+      operationId: UsersService.setAceConfig
+      tags:
+        - Users
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Put Ace Config
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                liveCompletion:
+                  type: boolean
+                  description: >-
+                    controls whether autocompletion snippets show up, the
+                    default value is true
+                behaviors:
+                  type: boolean
+                  description: >-
+                    controls whether things like automatic parenthesis and quote
+                    completion happens, the default value is false
+                language:
+                  type: string
+                  description: >-
+                    only for home users, should be one of ["python",
+                    "javascript", "cpp", "lua", "coffeescript"] right now
+  users/{handle}/subscription:
+    put:
+      description: |
+        Grants a user premium access to the "Home" version up to a certain time.
+      operationId: UsersService.grantPremiumSubscription
+      tags:
+        - Users
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Put Subscription
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ends:
+                  $ref: '#/components/schemas/datetimeString'
+              required:
+                - ends
+  users/{handle}/shorten-subscription:
+    put:
+      description: >
+        If the user already has a premium access up to a certain time, this
+        shortens/revokes his/her premium access. If the ends is less than or
+        equal to the current time, it revokes the subscription and sets the end
+        date to be the current time, else it just shortens the subscription.
+      operationId: UsersService.shortenSubscription
+      tags:
+        - Users
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Shorten User Subscription
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ends:
+                  $ref: '#/components/schemas/datetimeString'
+              required:
+                - ends
+  users/{handle}/license:
+    put:
+      description: |
+        Grants a user access to the "Classroom" version up to a certain time.
+        Sets their role to "student".
+      operationId: UsersService.grantLicense
+      tags:
+        - Users
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Grant User License
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ends:
+                  $ref: '#/components/schemas/datetimeString'
+              required:
+                - ends
+  users/{handle}/shorten-license:
+    put:
+      description: >
+        If the user already has access to the "Classroom" version up to a
+        certain time, this shortens/revokes his/her access. If the ends is less
+        than or equal to the current time, it revokes the enrollment and sets
+        the end date to be the current time, else it just shortens the
+        enrollment.
+      operationId: UsersService.shortenLicense
+      tags:
+        - Users
+      parameters:
+        - name: handle
+          in: path
+          description: The document's `_id` or `slug`.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Shorten User License
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ends:
+                  $ref: '#/components/schemas/datetimeString'
+              required:
+                - ends
+  user-lookup/{property}/{value}:
+    get:
+      description: Redirects to `/users/{handle}` given a unique, identifying property
+      operationId: UsersService.lookup
+      tags:
+        - Users
+      parameters:
+        - name: property
+          in: path
+          description: The property to lookup by. May either be `"israel-id"` or `"name"`.
+          required: true
+          schema:
+            type: string
+        - name: value
+          in: path
+          description: The value to be looked up.
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: ''
+      summary: Search for User
+      security: *ref_0
+components:
+  schemas:
+    UsersCreateRequestRole:
+      type: string
+      enum:
+        - student
+        - teacher
+      description: >
+        `"student"` or `"teacher"`. If unset, a home user will be created,
+        unable to join classrooms.
+    UsersCreateRequestHeroConfig:
+      type: object
+      properties:
+        thangType:
+          $ref: '#/components/schemas/objectIdString'
+    ClassroomsCreateRequestAceConfig:
+      type: object
+      properties:
+        language:
+          type: string
+          description: Programming language for the classroom
+    ClassroomsGetMembersStatsResponseItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        stats:
+          $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItemStats'
+    ClassroomsGetMembersStatsResponseItemStats:
+      type: object
+      properties:
+        gamesCompleted:
+          type: number
+          format: double
+        playtime:
+          type: number
+          format: double
+          description: Total play time in seconds
+    roleString:
+      type: string
+      description: Usually either 'teacher' or 'student'
+    datetimeString:
+      type: string
+    objectIdString:
+      type: string
+    UserResponse:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        email:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        role:
+          $ref: '#/components/schemas/roleString'
+        stats:
+          $ref: '#/components/schemas/UserResponseStats'
+        oAuthIdentities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponseOAuthIdentitiesItem'
+        subscription:
+          $ref: '#/components/schemas/UserResponseSubscription'
+        license:
+          $ref: '#/components/schemas/UserResponseLicense'
+    UserResponseStats:
+      type: object
+      properties:
+        gamesCompleted:
+          type: number
+          format: double
+        concepts:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        playTime:
+          type: number
+          format: double
+          description: Included only when specifically requested on the endpoint
+    UserResponseOAuthIdentitiesItem:
+      type: object
+      properties:
+        provider:
+          type: string
+        id:
+          type: string
+    UserResponseSubscription:
+      type: object
+      properties:
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
+    UserResponseLicense:
+      type: object
+      properties:
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
+    ClassroomResponse:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseCoursesItem'
+    ClassroomResponseCoursesItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        levels:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        instance_id:
+          $ref: '#/components/schemas/objectIdString'
+    ClassroomResponseWithCode:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        code:
+          type: string
+        codeCamel:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
+        clanId:
+          $ref: '#/components/schemas/objectIdString'
+    ClassroomResponseWithCodeCoursesItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        levels:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        instance_id:
+          $ref: '#/components/schemas/objectIdString'
+    PlaytimeStatsResponse:
+      type: object
+      properties:
+        playTime:
+          type: number
+          format: double
+          description: Total play time in seconds
+        gamesPlayed:
+          type: number
+          format: double
+          description: Number of levels played
+    LicenseStatsResponse:
+      type: object
+      properties:
+        licenseDaysGranted:
+          type: number
+          format: double
+          description: Total number of license days granted
+        licenseDaysUsed:
+          type: number
+          format: double
+          description: Number of license days used
+        licenseDaysRemaining:
+          type: number
+          format: double
+          description: Number of license days remaining
+        activeLicenses:
+          type: number
+          format: double
+          description: Number of active/valid licenses
+    LevelSessionResponse:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/LevelSessionResponseState'
+        level:
+          $ref: '#/components/schemas/LevelSessionResponseLevel'
+        levelID:
+          type: string
+          description: Level slug like `wakka-maul`
+        creator:
+          $ref: '#/components/schemas/objectIdString'
+        playtime:
+          type: integer
+          description: Time played in seconds.
+        changed:
+          $ref: '#/components/schemas/datetimeString'
+        created:
+          $ref: '#/components/schemas/datetimeString'
+        dateFirstCompleted:
+          $ref: '#/components/schemas/datetimeString'
+        submitted:
+          type: boolean
+          description: For arenas. Whether or not the level has been added to the ladder.
+        published:
+          type: boolean
+          description: >-
+            For shareable projects. Whether or not the project has been shared
+            with classmates.
+    LevelSessionResponseState:
+      type: object
+      properties:
+        complete:
+          type: boolean
+    LevelSessionResponseLevel:
+      type: object
+      properties:
+        original:
+          type: string
+          description: The id for the level.
+    ClanResponse:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        displayName:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        type:
+          type: string
+        kind:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: {}
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+servers:
+  - url: https://codecombat.com/api
+    description: default

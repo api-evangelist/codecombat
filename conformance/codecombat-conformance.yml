@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/codecombat-openapi-original.yml
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi 3.0.1 description published at codecombat-openapi
+- id: http-basic-auth
+  conforms: true
+  evidence: securitySchemes.BasicAuth type http scheme basic, applied to all operations
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No oauth2 securityScheme; the API's own auth is HTTP Basic. OAuth2 appears
+    only as a feature (linking third-party SSO identities to users), not as API
+    authorization.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: no application/problem+json responses declared in the spec
+- id: json-api
+  conforms: false
+- id: pagination
+  conforms: true
+  evidence: >-
+    getMembersStats supports memberLimit/memberSkip offset pagination;
+    retMemberLimit caps member arrays on several endpoints
+- id: idempotency
+  conforms: false
+  evidence: no Idempotency-Key header/param documented in the spec

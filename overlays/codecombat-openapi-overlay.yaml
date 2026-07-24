@@ -1,0 +1,34 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for CodeCombat Partner API
+  version: 1.0.0
+extends: openapi/codecombat-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: codecombat
+    x-apievangelist-category: education
+    description: >-
+      CodeCombat Partner API — SSO, user management, classroom administration,
+      course enrollment, licensing, and progress/playtime statistics. REST over
+      HTTPS with JSON payloads, secured by HTTP Basic authentication (API key
+      pair). Base URL https://codecombat.com/api.
+- target: $.info
+  update:
+    x-agentic-access:
+      note: >-
+        Write operations (create/grant/license/enroll/subscription) are
+        acting-class with real account and billing consequence; reads (stats,
+        get user/classroom) are connected/read-class.
+- target: $.tags
+  update:
+  - name: Users
+    description: Provision and manage users, licenses, subscriptions, and SSO identities.
+  - name: Classrooms
+    description: Create classrooms, manage members, and enroll students in courses.
+  - name: Clans
+    description: Manage clan membership.
+  - name: Stats
+    description: Aggregate playtime and license statistics across owned users.
+  - name: Auth
+    description: OAuth2 SSO login for linked identities.

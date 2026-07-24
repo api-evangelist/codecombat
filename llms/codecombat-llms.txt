@@ -1,0 +1,34 @@
+# CodeCombat
+
+> CodeCombat is a game-based computer science platform where students learn to code by writing Python or JavaScript to control heroes through a real programming game. The CodeCombat Partner API is a Fern-generated REST API for SSO, user management, classroom administration, course enrollment, licensing, and progress/playtime statistics. Base URL: https://codecombat.com/api. Auth: HTTP Basic (partner API key pair).
+
+## APIs
+
+- [CodeCombat Partner API docs](https://api-docs.codecombat.com/): SSO, users, classrooms, courses, licenses, and stats.
+- [OpenAPI description (raw)](https://raw.githubusercontent.com/api-evangelist/codecombat/refs/heads/main/openapi/codecombat-openapi-original.yml): OpenAPI 3.0.1, 20 operations across Users, Classrooms, Clans, Stats, Auth.
+
+## Specs
+
+- [OpenAPI 3.0.1](https://raw.githubusercontent.com/api-evangelist/codecombat/refs/heads/main/openapi/codecombat-openapi-original.yml)
+- [OpenAPI overlay (AE enhancements)](https://raw.githubusercontent.com/api-evangelist/codecombat/refs/heads/main/overlays/codecombat-openapi-overlay.yaml)
+- [Data model / ERD](https://raw.githubusercontent.com/api-evangelist/codecombat/refs/heads/main/data-model/codecombat-data-model.yml)
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/codecombat/refs/heads/main/authentication/codecombat-authentication.yml)
+- [API conventions](https://raw.githubusercontent.com/api-evangelist/codecombat/refs/heads/main/conventions/codecombat-conventions.yml)
+
+## SDKs
+
+- [Python SDK (PyPI: codecombat)](https://pypi.org/project/codecombat/)
+- [Go SDK](https://pkg.go.dev/github.com/codecombat/codecombat-go)
+- [Node SDK](https://github.com/codecombat/codecombat-node)
+- [Java SDK](https://github.com/codecombat/codecombat-java)
+- [Postman collection](https://github.com/codecombat/codecombat-postman)
+- [SDK monorepo (Fern)](https://github.com/codecombat/codecombat-api)
+
+## Docs
+
+- [Developer / API docs](https://api-docs.codecombat.com/)
+- [Teacher portal](https://codecombat.com/teachers)
+- [Pricing](https://codecombat.com/pricing)
+- [Status page](https://status.codecombat.com/)
+- [GitHub organization](https://github.com/codecombat)
+- [Help / Support](https://codecombat.com/help)

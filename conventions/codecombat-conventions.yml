@@ -1,0 +1,49 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/codecombat-openapi-original.yml
+notes: >-
+  Cross-cutting request/response semantics for the CodeCombat Partner API,
+  derived from the OpenAPI description. Idempotency is NOT supported (no
+  idempotency-key contract), so no Idempotency pointer is wired.
+authentication:
+  style: http-basic
+  detail: >-
+    HTTP Basic authentication using an API key pair issued to the partner.
+    Applied to every operation. See authentication/codecombat-authentication.yml.
+base_url: https://codecombat.com/api
+media_type: application/json
+resource_identity:
+  handle: >-
+    Most resources are addressed by a `handle` path param that accepts either
+    the MongoDB `_id` (objectIdString) or a URL `slug`.
+pagination:
+  style: offset
+  applies_to:
+  - ClassroomsService.getMembersStats
+  params:
+    limit: memberLimit
+    skip: memberSkip
+  defaults:
+    memberLimit: 10
+    memberLimit_max: 100
+  related:
+    retMemberLimit: >-
+      Caps the number of members embedded in classroom responses (default 1000)
+      on classroom create/get/enroll/member operations.
+idempotency:
+  supported: false
+  note: No idempotency-key header or parameter is documented.
+versioning:
+  scheme: uri-path
+  detail: Single unversioned base path /api; no version segment or version header.
+error_envelope:
+  documented: false
+  note: >-
+    The OpenAPI description declares only 200/204 responses; no error schema or
+    problem+json envelope is specified. See errors/ (none derivable).
+rate_limit_signaling:
+  documented: false
+cross_links:
+  authentication: authentication/codecombat-authentication.yml
+  lifecycle: lifecycle/codecombat-lifecycle.yml
+  data_model: data-model/codecombat-data-model.yml

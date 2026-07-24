@@ -1,0 +1,63 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/codecombat-openapi-original.yml
+notes: >-
+  Entity-relationship graph derived from OpenAPI component schemas and id-
+  reference fields. Ids are MongoDB ObjectId strings (objectIdString); many
+  resources are addressable by `_id` or `slug`.
+entities:
+- name: User
+  schema: UserResponse
+  id: _id
+  identifiers: [_id, slug, email]
+  fields: [name, email, role, stats, oAuthIdentities, subscription, license]
+- name: Classroom
+  schema: ClassroomResponseWithCode
+  id: _id
+  identifiers: [_id, code]
+  fields: [name, ownerID, members, courses, description, code, clanId]
+- name: Clan
+  schema: ClanResponse
+  id: _id
+  identifiers: [_id, slug]
+  fields: [name, displayName, ownerID, members, type, kind, metadata]
+- name: LevelSession
+  schema: LevelSessionResponse
+  id: creator
+  fields: [state, level, levelID, creator, playtime, dateFirstCompleted]
+- name: OAuthIdentity
+  schema: UserResponseOAuthIdentitiesItem
+  fields: [provider, id]
+relationships:
+- from: Classroom
+  to: User
+  type: belongs_to
+  via: ownerID
+- from: Classroom
+  to: User
+  type: has_many
+  via: members
+- from: Classroom
+  to: Clan
+  type: has_one
+  via: clanId
+- from: Clan
+  to: User
+  type: belongs_to
+  via: ownerID
+- from: Clan
+  to: User
+  type: has_many
+  via: members
+- from: User
+  to: OAuthIdentity
+  type: has_many
+  via: oAuthIdentities
+- from: LevelSession
+  to: User
+  type: belongs_to
+  via: creator
+- from: Classroom
+  to: LevelSession
+  type: has_many
+  via: members (per-member sessions via getLevelsPlayed)

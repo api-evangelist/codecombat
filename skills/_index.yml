@@ -1,0 +1,16 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/codecombat-openapi-original.yml
+skills:
+- file: codecombat-provision-and-license-user.md
+  name: Provision a user and grant a classroom license
+  api: openapi/codecombat-openapi-original.yml
+  operations: [UsersService.create, UsersService.grantLicense, UsersService.get]
+- file: codecombat-setup-classroom-and-enroll.md
+  name: Create a classroom and enroll a student in a course
+  api: openapi/codecombat-openapi-original.yml
+  operations: [ClassroomsService.create, ClassroomsService.upsertMember, ClassroomsService.enrollUserInCourse]
+- file: codecombat-pull-progress-stats.md
+  name: Pull classroom progress and playtime stats
+  api: openapi/codecombat-openapi-original.yml
+  operations: [ClassroomsService.getMembersStats, ClassroomsService.getLevelsPlayed, StatsService.getPlaytimeStats]

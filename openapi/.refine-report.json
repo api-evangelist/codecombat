@@ -1,0 +1,31 @@
+{
+  "provider": "codecombat",
+  "sources": [
+    "codecombat-auth-api-openapi.yml",
+    "codecombat-clans-api-openapi.yml",
+    "codecombat-classrooms-api-openapi.yml",
+    "codecombat-default-api-openapi.yml",
+    "codecombat-stats-api-openapi.yml",
+    "codecombat-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "codecombat-auth-api-openapi.yml",
+    "codecombat-clans-api-openapi.yml",
+    "codecombat-classrooms-api-openapi.yml",
+    "codecombat-default-api-openapi.yml",
+    "codecombat-stats-api-openapi.yml",
+    "codecombat-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [
+    "codecombat-auth-api-openapi.yml: info.version missing",
+    "codecombat-clans-api-openapi.yml: info.version missing",
+    "codecombat-classrooms-api-openapi.yml: info.version missing",
+    "codecombat-default-api-openapi.yml: info.version missing",
+    "codecombat-stats-api-openapi.yml: info.version missing",
+    "codecombat-users-api-openapi.yml: info.version missing"
+  ],
+  "notes": [],
+  "skipped": []
+}

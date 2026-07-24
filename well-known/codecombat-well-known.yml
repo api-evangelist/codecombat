@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: probed
+host: https://codecombat.com
+source: live probe of /.well-known/* paths
+notes: >-
+  codecombat.com is a single-page application that returns HTTP 200 with the
+  SPA HTML shell (content-type text/html) for every path, including nonexistent
+  ones. Every /.well-known/* path below returned 200 but served the HTML shell,
+  not a valid well-known document. No genuine well-known discovery documents are
+  published; no WellKnown/SecurityTxt pointer is wired. Recorded for idempotency.
+documents:
+- path: /.well-known/security.txt
+  status: 200
+  content_type: text/html
+  valid: false
+- path: /.well-known/openid-configuration
+  status: 200
+  content_type: text/html
+  valid: false
+- path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: text/html
+  valid: false
+- path: /.well-known/api-catalog
+  status: 200
+  content_type: text/html
+  valid: false
+- path: /.well-known/ai-plugin.json
+  status: 200
+  content_type: text/html
+  valid: false

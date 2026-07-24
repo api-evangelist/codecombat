@@ -1,0 +1,15 @@
+generated: '2026-07-18'
+method: searched
+source: https://api-docs.codecombat.com/
+versioning:
+  scheme: uri-path
+  current: unversioned
+  detail: Single base path https://codecombat.com/api with no version segment.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation/sunset policy found.
+sla:
+  url: null
+status_page: https://status.codecombat.com/
+deprecated_operations: []

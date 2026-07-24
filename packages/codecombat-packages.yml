@@ -1,0 +1,44 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/codecombat/codecombat-api
+notes: >-
+  CodeCombat publishes Fern-generated official SDKs from
+  https://github.com/codecombat/codecombat-api. The Python SDK is published to
+  PyPI as `codecombat`; the Node, Java, and Go SDKs are distributed as
+  first-party source repositories under the codecombat GitHub org (the Go module
+  resolves on pkg.go.dev). A Postman collection is published at
+  codecombat/codecombat-postman.
+packages:
+- language: python
+  registry: pypi
+  name: codecombat
+  version: 0.1.8
+  url: https://pypi.org/project/codecombat/
+  install: pip install codecombat
+  source: https://github.com/codecombat/codecombat-python
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: github.com/codecombat/codecombat-go
+  url: https://pkg.go.dev/github.com/codecombat/codecombat-go
+  install: go get github.com/codecombat/codecombat-go
+  source: https://github.com/codecombat/codecombat-go
+  official: true
+- language: javascript
+  registry: github
+  name: codecombat-node
+  url: https://github.com/codecombat/codecombat-node
+  source: https://github.com/codecombat/codecombat-node
+  official: true
+- language: java
+  registry: github
+  name: codecombat-java
+  url: https://github.com/codecombat/codecombat-java
+  source: https://github.com/codecombat/codecombat-java
+  official: true
+- language: postman
+  registry: github
+  name: codecombat-postman
+  url: https://github.com/codecombat/codecombat-postman
+  source: https://github.com/codecombat/codecombat-postman
+  official: true

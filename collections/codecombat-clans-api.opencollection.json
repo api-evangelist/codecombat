@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CodeCombat Auth Clans API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upsert User Into Clan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiclan/:handle/members",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Upserts a user into the clan."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

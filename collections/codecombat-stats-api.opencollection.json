@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CodeCombat Auth Stats API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Playtime Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://codecombat.com/apiplaytime-stats",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Earliest an included user was created"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Latest an included user was created"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter by country string"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns the playtime stats"
+        },
+        {
+          "info": {
+            "name": "Get License Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://codecombat.com/apilicense-stats",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns the license stats"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

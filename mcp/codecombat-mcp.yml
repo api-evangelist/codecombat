@@ -2,11 +2,9 @@ generated: '2026-07-18'
 method: derived
 status: candidate
 source: openapi/codecombat-openapi-original.yml
-notes: >-
-  No official hosted/remote CodeCombat MCP server was found (checked docs,
-  GitHub org, and MCP registries). This is a DERIVED candidate tool list, one
-  tool per OpenAPI operation, that a follow-up could implement against the
-  Partner API. Auth is HTTP Basic (API key pair) per the OpenAPI securityScheme.
+notes: No official hosted/remote CodeCombat MCP server was found (checked docs, GitHub org, and MCP registries).
+  This is a DERIVED candidate tool list, one tool per OpenAPI operation, that a follow-up could implement
+  against the Partner API. Auth is HTTP Basic (API key pair) per the OpenAPI securityScheme.
 server:
   name: codecombat
   transport: http
@@ -83,3 +81,9 @@ tools:
 - name: get_license_stats
   description: Get classroom/home license stats
   source_operation: openapi/codecombat-openapi-original.yml#StatsService.getLicenseStats
+deployment:
+  mode: none
+  verified: derived
+  tools: 24
+  checked: '2026-08-12'
+  source: catalog MCP census

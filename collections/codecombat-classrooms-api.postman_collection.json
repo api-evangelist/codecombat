@@ -1,0 +1,1109 @@
+{
+  "item": [
+    {
+      "id": "cd8d1085-2194-415c-92d0-3554af05a996",
+      "name": "Classrooms",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de615d76-4dc0-4023-b827-1888f9e4151a",
+          "name": "Get Classroom Details",
+          "request": {
+            "name": "Get Classroom Details",
+            "description": {
+              "content": "Returns the classroom details for a class code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classrooms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>",
+                  "description": "(Required) The classroom's `code`."
+                },
+                {
+                  "disabled": false,
+                  "key": "retMemberLimit",
+                  "value": "<double>",
+                  "description": "limit the return number of members for the classroom"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "96f8b46a-63fc-4797-b21b-9084461da905",
+              "name": "The classroom details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "retMemberLimit",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"members\": [\n    \"string\",\n    \"string\"\n  ],\n  \"ownerID\": \"string\",\n  \"description\": \"string\",\n  \"code\": \"string\",\n  \"codeCamel\": \"string\",\n  \"courses\": [\n    {\n      \"_id\": \"string\",\n      \"levels\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"string\",\n        \"string\"\n      ],\n      \"instance_id\": \"string\"\n    },\n    {\n      \"_id\": \"string\",\n      \"levels\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"string\",\n        \"string\"\n      ],\n      \"instance_id\": \"string\"\n    }\n  ],\n  \"clanId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f88501bf-c33b-4e4b-a2a0-988f211c31d2",
+          "name": "Create a classroom",
+          "request": {
+            "name": "Create a classroom",
+            "description": {
+              "content": "Creates a new empty `Classroom`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classrooms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"ownerID\": \"<string>\",\n  \"aceConfig\": {\n    \"language\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "11223ca2-bc29-4780-a000-e6ad3a2bc5e8",
+              "name": "The created classroom",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"ownerID\": \"<string>\",\n  \"aceConfig\": {\n    \"language\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"name\": \"string\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownerID\": \"<string>\",\n  \"description\": \"string\",\n  \"code\": \"string\",\n  \"codeCamel\": \"string\",\n  \"courses\": [\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {},\n          \"key_4\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    }\n  ],\n  \"clanId\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d661493-1198-4ef1-935a-40edd1584a4b",
+          "name": "Upsert a user from classroom",
+          "request": {
+            "name": "Upsert a user from classroom",
+            "description": {
+              "content": "Upserts a user into the classroom.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classrooms",
+                ":handle",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"retMemberLimit\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9523fa7-0285-4211-ae03-b297dccfaf18",
+              "name": "The classroom with the member added.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classrooms",
+                    ":handle",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"retMemberLimit\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"name\": \"string\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownerID\": \"<string>\",\n  \"description\": \"string\",\n  \"courses\": [\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b69f002-7545-477d-a763-7131f524e449",
+          "name": "Delete User from Classroom",
+          "request": {
+            "name": "Delete User from Classroom",
+            "description": {
+              "content": "Remove a user from the classroom.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classrooms",
+                ":handle",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"retMemberLimit\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69013826-32c0-49a6-81ec-5471fcb6eca8",
+              "name": "The classroom with the member removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classrooms",
+                    ":handle",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"<string>\",\n  \"retMemberLimit\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"name\": \"string\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownerID\": \"<string>\",\n  \"description\": \"string\",\n  \"courses\": [\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {},\n          \"key_4\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5728335a-33f6-4c52-b342-9408e4ce146a",
+          "name": "Enroll User in a Course",
+          "request": {
+            "name": "Enroll User in a Course",
+            "description": {
+              "content": "Enrolls a user in a course in a classroom.\nIf the course is paid, user must have an active license.\nUser must be a member of the classroom.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classrooms",
+                ":classroomHandle",
+                "courses",
+                ":courseHandle",
+                "enrolled"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "retMemberLimit",
+                  "value": "<double>",
+                  "description": "limit the return number of members for the classroom, the default value is 1000"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "classroomHandle",
+                  "description": "(Required) The classroom's `_id`."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "courseHandle",
+                  "description": "(Required) The course's `_id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa60d8b6-093a-40e4-9d2b-8440a33cdd02",
+              "name": "The classroom with the user enrolled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classrooms",
+                    ":classroomHandle",
+                    "courses",
+                    ":courseHandle",
+                    "enrolled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "retMemberLimit",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "classroomHandle",
+                      "description": "(Required) The classroom's `_id`."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "courseHandle",
+                      "description": "(Required) The course's `_id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"name\": \"string\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownerID\": \"<string>\",\n  \"description\": \"string\",\n  \"courses\": [\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {},\n          \"key_4\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2df6713-a3db-4573-a98d-2e075e4b1b0e",
+          "name": "Remove User from a classroom",
+          "request": {
+            "name": "Remove User from a classroom",
+            "description": {
+              "content": "Removes an enrolled user from a course in a classroom.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classrooms",
+                ":classroomHandle",
+                "courses",
+                ":courseHandle",
+                "remove-enrolled"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "retMemberLimit",
+                  "value": "<double>",
+                  "description": "limit the return number of members for the classroom, the default value is 1000"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "classroomHandle",
+                  "description": "(Required) The classroom's `_id`."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "courseHandle",
+                  "description": "(Required) The course's `_id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3d7f2d1-b61d-4bef-8041-557a9d75ae40",
+              "name": "The classroom with the user removed from the course.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classrooms",
+                    ":classroomHandle",
+                    "courses",
+                    ":courseHandle",
+                    "remove-enrolled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "retMemberLimit",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "classroomHandle",
+                      "description": "(Required) The classroom's `_id`."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "courseHandle",
+                      "description": "(Required) The course's `_id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"name\": \"string\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownerID\": \"<string>\",\n  \"description\": \"string\",\n  \"courses\": [\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"levels\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {},\n          \"key_4\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"enrolled\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"instance_id\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fc664f1-e19d-403a-b8ad-fd34ab989854",
+          "name": "Get Member Stats",
+          "request": {
+            "name": "Get Member Stats",
+            "description": {
+              "content": "Returns a list of all members stats for the classroom.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classrooms",
+                ":classroomHandle",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "If specified, include only the specified projection of returned stats; else, return all stats. Format as a comma-separated list, like `creator,playtime,state.complete`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "memberLimit",
+                  "value": "<double>",
+                  "description": "Limit the return member number. the default value is 10, and the max value is 100"
+                },
+                {
+                  "disabled": false,
+                  "key": "memberSkip",
+                  "value": "<double>",
+                  "description": "Skip the members that doesn't need to return, for pagination\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "classroomHandle",
+                  "description": "(Required) The classroom's `_id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3361204b-88a9-43ef-aa01-2029ca40fbd2",
+              "name": "The members stats for the classroom.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classrooms",
+                    ":classroomHandle",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "memberLimit",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "memberSkip",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "classroomHandle",
+                      "description": "(Required) The classroom's `_id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"<string>\",\n    \"stats\": {\n      \"gamesCompleted\": 5013.557205413102,\n      \"playtime\": 3767.3037667641142\n    }\n  },\n  {\n    \"_id\": \"<string>\",\n    \"stats\": {\n      \"gamesCompleted\": 5319.580987703763,\n      \"playtime\": 9863.833487153537\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ddb763d-d47e-48b1-999d-f3fb7838aac0",
+          "name": "Get Level Session",
+          "request": {
+            "name": "Get Level Session",
+            "description": {
+              "content": "Returns a list of all levels played by the user for the classroom.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classrooms",
+                ":classroomHandle",
+                "members",
+                ":memberHandle",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "classroomHandle",
+                  "description": "(Required) The classroom's `_id`."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "memberHandle",
+                  "description": "(Required) The classroom member's `_id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "42e77b6a-46a0-451e-81a9-9be976af4bdf",
+              "name": "The classroom with the user enrolled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classrooms",
+                    ":classroomHandle",
+                    "members",
+                    ":memberHandle",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "classroomHandle",
+                      "description": "(Required) The classroom's `_id`."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "memberHandle",
+                      "description": "(Required) The classroom member's `_id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"state\": {\n      \"complete\": false\n    },\n    \"level\": {\n      \"original\": \"string\"\n    },\n    \"levelID\": \"string\",\n    \"creator\": \"<string>\",\n    \"playtime\": 1248,\n    \"changed\": \"string\",\n    \"created\": \"string\",\n    \"dateFirstCompleted\": \"string\",\n    \"submitted\": false,\n    \"published\": false\n  },\n  {\n    \"state\": {\n      \"complete\": false\n    },\n    \"level\": {\n      \"original\": \"string\"\n    },\n    \"levelID\": \"string\",\n    \"creator\": \"<string>\",\n    \"playtime\": 917,\n    \"changed\": \"string\",\n    \"created\": \"string\",\n    \"dateFirstCompleted\": \"string\",\n    \"submitted\": true,\n    \"published\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://codecombat.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cec9b3fc-80c7-4870-833b-db00358ee843",
+    "name": "CodeCombat Auth Classrooms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

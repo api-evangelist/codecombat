@@ -1,0 +1,1413 @@
+{
+  "item": [
+    {
+      "id": "c07a38a8-89bb-4540-b21e-de0f6328aaf8",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7268464d-989f-4a32-b4d6-c08077070d81",
+          "name": "Create User",
+          "request": {
+            "name": "Create User",
+            "description": {
+              "content": "Creates a `User`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"role\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"heroConfig\": {\n    \"thangType\": \"<string>\"\n  },\n  \"birthday\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "05e3f08e-54ac-4d83-8dfe-0efbe6228392",
+              "name": "The created user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"role\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"heroConfig\": {\n    \"thangType\": \"<string>\"\n  },\n  \"birthday\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"role\": \"string\",\n  \"stats\": {\n    \"gamesCompleted\": 8081.199734873053,\n    \"concepts\": {\n      \"key_0\": 3633.9546478108796,\n      \"key_1\": 4222.295440918351,\n      \"key_2\": 3472.08539111695\n    },\n    \"playTime\": 8863.320279807898\n  },\n  \"oAuthIdentities\": [\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"subscription\": {\n    \"ends\": \"string\",\n    \"active\": false\n  },\n  \"license\": {\n    \"ends\": \"string\",\n    \"active\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c18cf36f-d983-49c9-940b-5fc93f6d9b20",
+          "name": "Get User",
+          "request": {
+            "name": "Get User",
+            "description": {
+              "content": "Returns a `User`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":handle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "includePlayTime",
+                  "value": "<string>",
+                  "description": "Set to non-empty string to include stats.playTime in response"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d49a28ee-7040-4059-8b5d-ad87a0ebafe0",
+              "name": "The requested user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":handle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includePlayTime",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"role\": \"string\",\n  \"stats\": {\n    \"gamesCompleted\": 4424.009715590828,\n    \"concepts\": {\n      \"key_0\": 8054.655651239481,\n      \"key_1\": 1594.3391699129095,\n      \"key_2\": 9949.53170223145\n    },\n    \"playTime\": 2322.3554202282116\n  },\n  \"oAuthIdentities\": [\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"subscription\": {\n    \"ends\": \"string\",\n    \"active\": false\n  },\n  \"license\": {\n    \"ends\": \"string\",\n    \"active\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a2b8b4a-7f3f-402f-8b32-21980ef83df5",
+          "name": "Update User",
+          "request": {
+            "name": "Update User",
+            "description": {
+              "content": "Modify name of a `User`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":handle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"birthday\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14e598c6-c66f-4f31-adad-68aa385e8426",
+              "name": "The affected user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":handle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"birthday\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"role\": \"string\",\n  \"stats\": {\n    \"gamesCompleted\": 4424.009715590828,\n    \"concepts\": {\n      \"key_0\": 8054.655651239481,\n      \"key_1\": 1594.3391699129095,\n      \"key_2\": 9949.53170223145\n    },\n    \"playTime\": 2322.3554202282116\n  },\n  \"oAuthIdentities\": [\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"subscription\": {\n    \"ends\": \"string\",\n    \"active\": false\n  },\n  \"license\": {\n    \"ends\": \"string\",\n    \"active\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f12685e3-8e7f-48cc-b1a8-328085159ba0",
+          "name": "Get Classrooms By User",
+          "request": {
+            "name": "Get Classrooms By User",
+            "description": {
+              "content": "Returns a list of `Classrooms` this user is in (if a student) or owns (if a teacher).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":handle",
+                "classrooms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "retMemberLimit",
+                  "value": "<double>",
+                  "description": "limit the return number of members for each classroom"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9621d755-e7f8-47ea-b081-15ac57078a55",
+              "name": "The requested classrooms",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":handle",
+                    "classrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "retMemberLimit",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"<string>\",\n    \"name\": \"string\",\n    \"members\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ownerID\": \"<string>\",\n    \"description\": \"string\",\n    \"code\": \"string\",\n    \"codeCamel\": \"string\",\n    \"courses\": [\n      {\n        \"_id\": \"<string>\",\n        \"levels\": [\n          {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          {\n            \"key_0\": {}\n          }\n        ],\n        \"enrolled\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"instance_id\": \"<string>\"\n      },\n      {\n        \"_id\": \"<string>\",\n        \"levels\": [\n          {\n            \"key_0\": {}\n          },\n          {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        ],\n        \"enrolled\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"instance_id\": \"<string>\"\n      }\n    ],\n    \"clanId\": \"<string>\"\n  },\n  {\n    \"_id\": \"<string>\",\n    \"name\": \"string\",\n    \"members\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ownerID\": \"<string>\",\n    \"description\": \"string\",\n    \"code\": \"string\",\n    \"codeCamel\": \"string\",\n    \"courses\": [\n      {\n        \"_id\": \"<string>\",\n        \"levels\": [\n          {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          {\n            \"key_0\": {}\n          }\n        ],\n        \"enrolled\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"instance_id\": \"<string>\"\n      },\n      {\n        \"_id\": \"<string>\",\n        \"levels\": [\n          {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        ],\n        \"enrolled\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"instance_id\": \"<string>\"\n      }\n    ],\n    \"clanId\": \"<string>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dca1905-7416-4a52-8312-33c6e0bdac8a",
+          "name": "Get User Hero",
+          "request": {
+            "name": "Get User Hero",
+            "description": {
+              "content": "Set the user's hero.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":handle",
+                "hero-config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"thangType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d83e2d1-6e1e-4790-9d9d-3bc524b4df8c",
+              "name": "The affected user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":handle",
+                    "hero-config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"thangType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"role\": \"string\",\n  \"stats\": {\n    \"gamesCompleted\": 4424.009715590828,\n    \"concepts\": {\n      \"key_0\": 8054.655651239481,\n      \"key_1\": 1594.3391699129095,\n      \"key_2\": 9949.53170223145\n    },\n    \"playTime\": 2322.3554202282116\n  },\n  \"oAuthIdentities\": [\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"subscription\": {\n    \"ends\": \"string\",\n    \"active\": false\n  },\n  \"license\": {\n    \"ends\": \"string\",\n    \"active\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "445b7ba3-d097-4b4d-bd9f-45de89b4b82f",
+          "name": "Put Ace Config",
+          "request": {
+            "name": "Put Ace Config",
+            "description": {
+              "content": "Set the user's aceConfig (the settings for the in-game Ace code editor), such as whether to enable autocomplete.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":handle",
+                "ace-config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"liveCompletion\": \"<boolean>\",\n  \"behaviors\": \"<boolean>\",\n  \"language\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1db4ed3f-aa81-4424-b46c-2480afa1e38d",
+              "name": "The affected user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":handle",
+                    "ace-config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"liveCompletion\": \"<boolean>\",\n  \"behaviors\": \"<boolean>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"role\": \"string\",\n  \"stats\": {\n    \"gamesCompleted\": 4424.009715590828,\n    \"concepts\": {\n      \"key_0\": 8054.655651239481,\n      \"key_1\": 1594.3391699129095,\n      \"key_2\": 9949.53170223145\n    },\n    \"playTime\": 2322.3554202282116\n  },\n  \"oAuthIdentities\": [\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"subscription\": {\n    \"ends\": \"string\",\n    \"active\": false\n  },\n  \"license\": {\n    \"ends\": \"string\",\n    \"active\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d27201e-0d44-487b-a1cd-921f0ae7ce97",
+          "name": "Put Subscription",
+          "request": {
+            "name": "Put Subscription",
+            "description": {
+              "content": "Grants a user premium access to the \"Home\" version up to a certain time.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":handle",
+                "subscription"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ends\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c87269db-7543-46d6-afe4-6ec8d9d27a4f",
+              "name": "The affected user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":handle",
+                    "subscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ends\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"role\": \"string\",\n  \"stats\": {\n    \"gamesCompleted\": 3423.7581337090937,\n    \"concepts\": {\n      \"key_0\": 9712.173264302808\n    },\n    \"playTime\": 6539.856453900378\n  },\n  \"oAuthIdentities\": [\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"subscription\": {\n    \"ends\": \"<string>\",\n    \"active\": false\n  },\n  \"license\": {\n    \"ends\": \"<string>\",\n    \"active\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "532884d2-1c57-4fe4-8383-dc79f6637ae9",
+          "name": "Shorten User Subscription",
+          "request": {
+            "name": "Shorten User Subscription",
+            "description": {
+              "content": "If the user already has a premium access up to a certain time, this shortens/revokes his/her premium access. If the ends is less than or equal to the current time, it revokes the subscription and sets the end date to be the current time, else it just shortens the subscription.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":handle",
+                "shorten-subscription"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ends\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8b2ef3e-4d64-42c2-bb63-706303070de7",
+              "name": "The affected user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":handle",
+                    "shorten-subscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ends\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"role\": \"string\",\n  \"stats\": {\n    \"gamesCompleted\": 3423.7581337090937,\n    \"concepts\": {\n      \"key_0\": 9712.173264302808\n    },\n    \"playTime\": 6539.856453900378\n  },\n  \"oAuthIdentities\": [\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"subscription\": {\n    \"ends\": \"<string>\",\n    \"active\": false\n  },\n  \"license\": {\n    \"ends\": \"<string>\",\n    \"active\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0b4cd1e-e3ec-4738-9c09-17d29d2c1e44",
+          "name": "Grant User License",
+          "request": {
+            "name": "Grant User License",
+            "description": {
+              "content": "Grants a user access to the \"Classroom\" version up to a certain time.\nSets their role to \"student\".\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":handle",
+                "license"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ends\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25a53b10-bde7-4615-a171-e2774fc756d1",
+              "name": "The affected user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":handle",
+                    "license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ends\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"role\": \"string\",\n  \"stats\": {\n    \"gamesCompleted\": 3423.7581337090937,\n    \"concepts\": {\n      \"key_0\": 9712.173264302808\n    },\n    \"playTime\": 6539.856453900378\n  },\n  \"oAuthIdentities\": [\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"subscription\": {\n    \"ends\": \"<string>\",\n    \"active\": false\n  },\n  \"license\": {\n    \"ends\": \"<string>\",\n    \"active\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ea1fb20-d81b-4ac2-b70b-30ca6708c73d",
+          "name": "Shorten User License",
+          "request": {
+            "name": "Shorten User License",
+            "description": {
+              "content": "If the user already has access to the \"Classroom\" version up to a certain time, this shortens/revokes his/her access. If the ends is less than or equal to the current time, it revokes the enrollment and sets the end date to be the current time, else it just shortens the enrollment.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":handle",
+                "shorten-license"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "handle",
+                  "description": "(Required) The document's `_id` or `slug`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ends\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1b447cda-2a66-4545-b1ec-ca2be7f4bb39",
+              "name": "The affected user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":handle",
+                    "shorten-license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "handle",
+                      "description": "(Required) The document's `_id` or `slug`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ends\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"<string>\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"role\": \"string\",\n  \"stats\": {\n    \"gamesCompleted\": 3423.7581337090937,\n    \"concepts\": {\n      \"key_0\": 9712.173264302808\n    },\n    \"playTime\": 6539.856453900378\n  },\n  \"oAuthIdentities\": [\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"provider\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"subscription\": {\n    \"ends\": \"<string>\",\n    \"active\": false\n  },\n  \"license\": {\n    \"ends\": \"<string>\",\n    \"active\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12dc0bdd-fc89-4e46-ad04-c9a1288f819d",
+          "name": "Search for User",
+          "request": {
+            "name": "Search for User",
+            "description": {
+              "content": "Redirects to `/users/{handle}` given a unique, identifying property",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user-lookup",
+                ":property",
+                ":value"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "property",
+                  "description": "(Required) The property to lookup by. May either be `\"israel-id\"` or `\"name\"`."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "value",
+                  "description": "(Required) The value to be looked up."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "17773879-c16e-4540-82c6-7e4a7f57a07b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-lookup",
+                    ":property",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "property",
+                      "description": "(Required) The property to lookup by. May either be `\"israel-id\"` or `\"name\"`."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) The value to be looked up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://codecombat.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9227cfb3-2bbe-4564-bbff-6b9dae198b96",
+    "name": "CodeCombat Auth Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

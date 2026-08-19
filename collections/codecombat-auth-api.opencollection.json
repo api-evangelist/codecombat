@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CodeCombat Auth API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://codecombat.com/apiauth/login-o-auth",
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Your OAuth Provider ID"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "Will be passed through your lookup URL to get the user ID. Required if no `code`."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Will be passed to the OAuth token endpoint to get a token. Required if no `accessToken`."
+              },
+              {
+                "name": "redirect",
+                "value": "",
+                "type": "query",
+                "description": "Override where the user will navigate to after successfully logging in."
+              },
+              {
+                "name": "errorRedirect",
+                "value": "",
+                "type": "query",
+                "description": "If an error happens, redirects the user to this url, with at least query parameters `code`, `errorName` and `message`."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Logs a user in. In this example, we call your lookup URL (let's say, `https://oauth.provider/user?t=<%= accessToken %>`) with the access token (`1234`). The lookup URL returns `{ id: 'abcd' }` in this case. We will match this `id` with the OAuthIdentity stored in the user information in our db. If everything checks out, the user is logged in and redirected to the home page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

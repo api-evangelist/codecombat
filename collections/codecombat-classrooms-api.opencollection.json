@@ -1,0 +1,276 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CodeCombat Auth Classrooms API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Classrooms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Classroom Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://codecombat.com/apiclassrooms",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "The classroom's `code`."
+              },
+              {
+                "name": "retMemberLimit",
+                "value": "",
+                "type": "query",
+                "description": "limit the return number of members for the classroom"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns the classroom details for a class code."
+        },
+        {
+          "info": {
+            "name": "Create a classroom",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://codecombat.com/apiclassrooms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a new empty `Classroom`."
+        },
+        {
+          "info": {
+            "name": "Upsert a user from classroom",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiclassrooms/:handle/members",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Upserts a user into the classroom."
+        },
+        {
+          "info": {
+            "name": "Delete User from Classroom",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://codecombat.com/apiclassrooms/:handle/members",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Remove a user from the classroom."
+        },
+        {
+          "info": {
+            "name": "Enroll User in a Course",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiclassrooms/:classroomHandle/courses/:courseHandle/enrolled",
+            "params": [
+              {
+                "name": "classroomHandle",
+                "value": "",
+                "type": "path",
+                "description": "The classroom's `_id`."
+              },
+              {
+                "name": "courseHandle",
+                "value": "",
+                "type": "path",
+                "description": "The course's `_id`."
+              },
+              {
+                "name": "retMemberLimit",
+                "value": "",
+                "type": "query",
+                "description": "limit the return number of members for the classroom, the default value is 1000"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Enrolls a user in a course in a classroom.\nIf the course is paid, user must have an active license.\nUser must be a member of the classroom.\n"
+        },
+        {
+          "info": {
+            "name": "Remove User from a classroom",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiclassrooms/:classroomHandle/courses/:courseHandle/remove-enrolled",
+            "params": [
+              {
+                "name": "classroomHandle",
+                "value": "",
+                "type": "path",
+                "description": "The classroom's `_id`."
+              },
+              {
+                "name": "courseHandle",
+                "value": "",
+                "type": "path",
+                "description": "The course's `_id`."
+              },
+              {
+                "name": "retMemberLimit",
+                "value": "",
+                "type": "query",
+                "description": "limit the return number of members for the classroom, the default value is 1000"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Removes an enrolled user from a course in a classroom.\n"
+        },
+        {
+          "info": {
+            "name": "Get Member Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://codecombat.com/apiclassrooms/:classroomHandle/stats",
+            "params": [
+              {
+                "name": "classroomHandle",
+                "value": "",
+                "type": "path",
+                "description": "The classroom's `_id`."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "If specified, include only the specified projection of returned stats; else, return all stats. Format as a comma-separated list, like `creator,playtime,state.complete`.\n"
+              },
+              {
+                "name": "memberLimit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the return member number. the default value is 10, and the max value is 100"
+              },
+              {
+                "name": "memberSkip",
+                "value": "",
+                "type": "query",
+                "description": "Skip the members that doesn't need to return, for pagination\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns a list of all members stats for the classroom.\n"
+        },
+        {
+          "info": {
+            "name": "Get Level Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://codecombat.com/apiclassrooms/:classroomHandle/members/:memberHandle/sessions",
+            "params": [
+              {
+                "name": "classroomHandle",
+                "value": "",
+                "type": "path",
+                "description": "The classroom's `_id`."
+              },
+              {
+                "name": "memberHandle",
+                "value": "",
+                "type": "path",
+                "description": "The classroom member's `_id`."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns a list of all levels played by the user for the classroom.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

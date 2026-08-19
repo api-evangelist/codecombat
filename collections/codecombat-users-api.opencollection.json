@@ -1,0 +1,324 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CodeCombat Auth Users API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://codecombat.com/apiusers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a `User`.\n"
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://codecombat.com/apiusers/:handle",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              },
+              {
+                "name": "includePlayTime",
+                "value": "",
+                "type": "query",
+                "description": "Set to non-empty string to include stats.playTime in response"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns a `User`."
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiusers/:handle",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Modify name of a `User`"
+        },
+        {
+          "info": {
+            "name": "Get Classrooms By User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://codecombat.com/apiusers/:handle/classrooms",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              },
+              {
+                "name": "retMemberLimit",
+                "value": "",
+                "type": "query",
+                "description": "limit the return number of members for each classroom"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns a list of `Classrooms` this user is in (if a student) or owns (if a teacher)."
+        },
+        {
+          "info": {
+            "name": "Get User Hero",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiusers/:handle/hero-config",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Set the user's hero."
+        },
+        {
+          "info": {
+            "name": "Put Ace Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiusers/:handle/ace-config",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Set the user's aceConfig (the settings for the in-game Ace code editor), such as whether to enable autocomplete."
+        },
+        {
+          "info": {
+            "name": "Put Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiusers/:handle/subscription",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Grants a user premium access to the \"Home\" version up to a certain time.\n"
+        },
+        {
+          "info": {
+            "name": "Shorten User Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiusers/:handle/shorten-subscription",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "If the user already has a premium access up to a certain time, this shortens/revokes his/her premium access. If the ends is less than or equal to the current time, it revokes the subscription and sets the end date to be the current time, else it just shortens the subscription.\n"
+        },
+        {
+          "info": {
+            "name": "Grant User License",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiusers/:handle/license",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Grants a user access to the \"Classroom\" version up to a certain time.\nSets their role to \"student\".\n"
+        },
+        {
+          "info": {
+            "name": "Shorten User License",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://codecombat.com/apiusers/:handle/shorten-license",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "The document's `_id` or `slug`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "If the user already has access to the \"Classroom\" version up to a certain time, this shortens/revokes his/her access. If the ends is less than or equal to the current time, it revokes the enrollment and sets the end date to be the current time, else it just shortens the enrollment.\n"
+        },
+        {
+          "info": {
+            "name": "Search for User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://codecombat.com/apiuser-lookup/:property/:value",
+            "params": [
+              {
+                "name": "property",
+                "value": "",
+                "type": "path",
+                "description": "The property to lookup by. May either be `\"israel-id\"` or `\"name\"`."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "path",
+                "description": "The value to be looked up."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Redirects to `/users/{handle}` given a unique, identifying property"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

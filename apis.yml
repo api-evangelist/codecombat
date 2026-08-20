@@ -54,6 +54,8 @@ apis:
   humanURL: https://api-docs.codecombat.com/
   baseURL: https://codecombat.com/api
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -83,7 +85,8 @@ apis:
   description: The Default API from CodeCombat — 1 operation(s) for default.
   humanURL: https://api-docs.codecombat.com/
   baseURL: https://codecombat.com/api
-  tags:
+  tags: []
+  tags_raw:
   - Default
   properties:
   - type: OpenAPI
@@ -104,6 +107,8 @@ apis:
   humanURL: https://api-docs.codecombat.com/
   baseURL: https://codecombat.com/api
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI

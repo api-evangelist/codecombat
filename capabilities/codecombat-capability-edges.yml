@@ -1,0 +1,25 @@
+slug: codecombat
+provider: CodeCombat
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Classrooms
+  spec_file: codecombat-classrooms-api-openapi.yml
+  capability_id: BC-4720.10
+  capability_id_l1: BC-4720
+  capability_name: Enrolment & Registration
+  confidence: 0.7
+  evidence: POST classrooms  Create a classroom; PUT classrooms/{classroomHandle}/courses/{courseHandle}/enrolled  ClassroomsService.enrollUserInCourse
+  reason: Operations create classrooms and enrol/remove users in courses, i.e. registration of learners
+    into class sections. Some ambiguity with learning-environment operations since this is a game-based
+    platform, hence 0.7.

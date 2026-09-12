@@ -132,6 +132,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Website
+  url: https://www.codecombat.com/
 - type: CapabilityMap
   url: capabilities/codecombat-capability-edges.yml
   name: CodeCombat Business Capability Map

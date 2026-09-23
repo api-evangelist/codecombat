@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: CodeCombat Auth Users API
-  version: "1.0"
+  title: CodeCombat Users API
+  version: ''
 servers:
 - url: https://codecombat.com/api
   description: default
@@ -10,9 +10,7 @@ tags:
 paths:
   users:
     post:
-      description: 'Creates a `User`.
-
-        '
+      description: Creates a `User`.
       operationId: UsersService.create
       tags:
       - Users
@@ -223,9 +221,7 @@ paths:
                   description: only for home users, should be one of ["python", "javascript", "cpp", "lua", "coffeescript"] right now
   users/{handle}/subscription:
     put:
-      description: 'Grants a user premium access to the "Home" version up to a certain time.
-
-        '
+      description: Grants a user premium access to the "Home" version up to a certain time.
       operationId: UsersService.grantPremiumSubscription
       tags:
       - Users
@@ -259,9 +255,7 @@ paths:
               - ends
   users/{handle}/shorten-subscription:
     put:
-      description: 'If the user already has a premium access up to a certain time, this shortens/revokes his/her premium access. If the ends is less than or equal to the current time, it revokes the subscription and sets the end date to be the current time, else it just shortens the subscription.
-
-        '
+      description: If the user already has a premium access up to a certain time, this shortens/revokes his/her premium access. If the ends is less than or equal to the current time, it revokes the subscription and sets the end date to be the current time, else it just shortens the subscription.
       operationId: UsersService.shortenSubscription
       tags:
       - Users
@@ -297,9 +291,7 @@ paths:
     put:
       description: 'Grants a user access to the "Classroom" version up to a certain time.
 
-        Sets their role to "student".
-
-        '
+        Sets their role to "student".'
       operationId: UsersService.grantLicense
       tags:
       - Users
@@ -333,9 +325,7 @@ paths:
               - ends
   users/{handle}/shorten-license:
     put:
-      description: 'If the user already has access to the "Classroom" version up to a certain time, this shortens/revokes his/her access. If the ends is less than or equal to the current time, it revokes the enrollment and sets the end date to be the current time, else it just shortens the enrollment.
-
-        '
+      description: If the user already has access to the "Classroom" version up to a certain time, this shortens/revokes his/her access. If the ends is less than or equal to the current time, it revokes the enrollment and sets the end date to be the current time, else it just shortens the enrollment.
       operationId: UsersService.shortenLicense
       tags:
       - Users
@@ -394,46 +384,6 @@ paths:
       - BasicAuth: []
 components:
   schemas:
-    UserResponseOAuthIdentitiesItem:
-      type: object
-      properties:
-        provider:
-          type: string
-        id:
-          type: string
-    UserResponseSubscription:
-      type: object
-      properties:
-        ends:
-          $ref: '#/components/schemas/datetimeString'
-        active:
-          type: boolean
-    datetimeString:
-      type: string
-    UserResponse:
-      type: object
-      description: Subset of properties listed here
-      properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        email:
-          type: string
-        name:
-          type: string
-        slug:
-          type: string
-        role:
-          $ref: '#/components/schemas/roleString'
-        stats:
-          $ref: '#/components/schemas/UserResponseStats'
-        oAuthIdentities:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserResponseOAuthIdentitiesItem'
-        subscription:
-          $ref: '#/components/schemas/UserResponseSubscription'
-        license:
-          $ref: '#/components/schemas/UserResponseLicense'
     ClassroomResponseWithCode:
       type: object
       description: Subset of properties listed here
@@ -460,24 +410,13 @@ components:
             $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
         clanId:
           $ref: '#/components/schemas/objectIdString'
-    UsersCreateRequestHeroConfig:
+    UserResponseSubscription:
       type: object
       properties:
-        thangType:
-          $ref: '#/components/schemas/objectIdString'
-    UsersCreateRequestRole:
-      type: string
-      enum:
-      - student
-      - teacher
-      description: '`"student"` or `"teacher"`. If unset, a home user will be created, unable to join classrooms.
-
-        '
-    objectIdString:
-      type: string
-    roleString:
-      type: string
-      description: Usually either 'teacher' or 'student'
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
     ClassroomResponseWithCodeCoursesItem:
       type: object
       properties:
@@ -494,6 +433,38 @@ components:
             $ref: '#/components/schemas/objectIdString'
         instance_id:
           $ref: '#/components/schemas/objectIdString'
+    UsersCreateRequestRole:
+      type: string
+      enum:
+      - student
+      - teacher
+      description: '`"student"` or `"teacher"`. If unset, a home user will be created, unable to join classrooms.
+
+        '
+    UsersCreateRequestHeroConfig:
+      type: object
+      properties:
+        thangType:
+          $ref: '#/components/schemas/objectIdString'
+    datetimeString:
+      type: string
+    UserResponseLicense:
+      type: object
+      properties:
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
+    UserResponseOAuthIdentitiesItem:
+      type: object
+      properties:
+        provider:
+          type: string
+        id:
+          type: string
+    roleString:
+      type: string
+      description: Usually either 'teacher' or 'student'
     UserResponseStats:
       type: object
       properties:
@@ -509,13 +480,32 @@ components:
           type: number
           format: double
           description: Included only when specifically requested on the endpoint
-    UserResponseLicense:
+    UserResponse:
       type: object
+      description: Subset of properties listed here
       properties:
-        ends:
-          $ref: '#/components/schemas/datetimeString'
-        active:
-          type: boolean
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        email:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        role:
+          $ref: '#/components/schemas/roleString'
+        stats:
+          $ref: '#/components/schemas/UserResponseStats'
+        oAuthIdentities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponseOAuthIdentitiesItem'
+        subscription:
+          $ref: '#/components/schemas/UserResponseSubscription'
+        license:
+          $ref: '#/components/schemas/UserResponseLicense'
+    objectIdString:
+      type: string
   securitySchemes:
     BasicAuth:
       type: http

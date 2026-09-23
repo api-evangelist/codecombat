@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: CodeCombat Auth Clans API
-  version: "1.0"
+  title: CodeCombat Clans API
+  version: ''
 servers:
 - url: https://codecombat.com/api
   description: default

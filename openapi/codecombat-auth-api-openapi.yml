@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: CodeCombat Auth API
-  version: "1.0"
+  version: ''
 servers:
 - url: https://codecombat.com/api
   description: default
@@ -10,9 +10,7 @@ tags:
 paths:
   auth/login-o-auth:
     get:
-      description: 'Logs a user in. In this example, we call your lookup URL (let''s say, `https://oauth.provider/user?t=<%= accessToken %>`) with the access token (`1234`). The lookup URL returns `{ id: ''abcd'' }` in this case. We will match this `id` with the OAuthIdentity stored in the user information in our db. If everything checks out, the user is logged in and redirected to the home page.
-
-        '
+      description: 'Logs a user in. In this example, we call your lookup URL (let''s say, `https://oauth.provider/user?t=`) with the access token (`1234`). The lookup URL returns `{ id: ''abcd'' }` in this case. We will match this `id` with the OAuthIdentity stored in the user information in our db. If everything checks out, the user is logged in and redirected to the home page.'
       operationId: AuthService.loginOauth
       tags:
       - Auth

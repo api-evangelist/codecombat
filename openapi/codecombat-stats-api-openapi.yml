@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: CodeCombat Auth Stats API
-  version: "1.0"
+  title: CodeCombat Stats API
+  version: ''
 servers:
 - url: https://codecombat.com/api
   description: default
@@ -62,17 +62,6 @@ paths:
       - BasicAuth: []
 components:
   schemas:
-    PlaytimeStatsResponse:
-      type: object
-      properties:
-        playTime:
-          type: number
-          format: double
-          description: Total play time in seconds
-        gamesPlayed:
-          type: number
-          format: double
-          description: Number of levels played
     LicenseStatsResponse:
       type: object
       properties:
@@ -92,6 +81,17 @@ components:
           type: number
           format: double
           description: Number of active/valid licenses
+    PlaytimeStatsResponse:
+      type: object
+      properties:
+        playTime:
+          type: number
+          format: double
+          description: Total play time in seconds
+        gamesPlayed:
+          type: number
+          format: double
+          description: Number of levels played
   securitySchemes:
     BasicAuth:
       type: http

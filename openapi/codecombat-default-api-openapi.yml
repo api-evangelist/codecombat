@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: CodeCombat Auth  API
-  version: "1.0"
+  title: CodeCombat API
+  version: ''
 servers:
 - url: https://codecombat.com/api
   description: default
@@ -10,9 +10,7 @@ tags:
 paths:
   users/{handle}/o-auth-identities:
     post:
-      description: 'Adds an OAuth2 identity to the user, so that they can be logged in with that identity. You need to send the OAuth code or the access token to this endpoint. 1. If no access token is provided, it will use your OAuth2 token URL to exchange the given code for an access token. 2. Then it will use the access token (given by you, or received from step 1) to look up the user on your service using the lookup URL, and expects a JSON object in response with an `id` property. 3. It will then save that user `id` to the user in our db as a new OAuthIdentity. In this example, we call your lookup URL (let''s say, `https://oauth.provider/user?t=<%= accessToken %>`) with the access token (`1234`). The lookup URL returns `{ id: ''abcd'' }` in this case, which we save to the user in our db.
-
-        '
+      description: 'Adds an OAuth2 identity to the user, so that they can be logged in with that identity. You need to send the OAuth code or the access token to this endpoint. 1. If no access token is provided, it will use your OAuth2 token URL to exchange the given code for an access token. 2. Then it will use the access token (given by you, or received from step 1) to look up the user on your service using the lookup URL, and expects a JSON object in response with an `id` property. 3. It will then save that user `id` to the user in our db as a new OAuthIdentity. In this example, we call your lookup URL (let''s say, `https://oauth.provider/user?t=`) with the access token (`1234`). The lookup URL returns `{ id: ''abcd'' }` in this case, which we save to the user in our db.'
       operationId: Service.postUsersHandleOAuthIdentities
       tags:
       - ''
@@ -53,13 +51,6 @@ paths:
               - provider
 components:
   schemas:
-    UserResponseOAuthIdentitiesItem:
-      type: object
-      properties:
-        provider:
-          type: string
-        id:
-          type: string
     UserResponseSubscription:
       type: object
       properties:
@@ -67,6 +58,40 @@ components:
           $ref: '#/components/schemas/datetimeString'
         active:
           type: boolean
+    datetimeString:
+      type: string
+    UserResponseLicense:
+      type: object
+      properties:
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
+    UserResponseOAuthIdentitiesItem:
+      type: object
+      properties:
+        provider:
+          type: string
+        id:
+          type: string
+    roleString:
+      type: string
+      description: Usually either 'teacher' or 'student'
+    UserResponseStats:
+      type: object
+      properties:
+        gamesCompleted:
+          type: number
+          format: double
+        concepts:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        playTime:
+          type: number
+          format: double
+          description: Included only when specifically requested on the endpoint
     UserResponse:
       type: object
       description: Subset of properties listed here
@@ -91,35 +116,8 @@ components:
           $ref: '#/components/schemas/UserResponseSubscription'
         license:
           $ref: '#/components/schemas/UserResponseLicense'
-    datetimeString:
-      type: string
     objectIdString:
       type: string
-    roleString:
-      type: string
-      description: Usually either 'teacher' or 'student'
-    UserResponseStats:
-      type: object
-      properties:
-        gamesCompleted:
-          type: number
-          format: double
-        concepts:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-        playTime:
-          type: number
-          format: double
-          description: Included only when specifically requested on the endpoint
-    UserResponseLicense:
-      type: object
-      properties:
-        ends:
-          $ref: '#/components/schemas/datetimeString'
-        active:
-          type: boolean
   securitySchemes:
     BasicAuth:
       type: http

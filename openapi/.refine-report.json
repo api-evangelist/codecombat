@@ -1,31 +1,38 @@
 {
   "provider": "codecombat",
   "sources": [
-    "codecombat-auth-api-openapi.yml",
-    "codecombat-clans-api-openapi.yml",
-    "codecombat-classrooms-api-openapi.yml",
-    "codecombat-default-api-openapi.yml",
-    "codecombat-stats-api-openapi.yml",
-    "codecombat-users-api-openapi.yml"
+    "_original/codecombat-openapi-original.yml"
   ],
   "outputs": [
+    "codecombat-default-api-openapi.yml",
     "codecombat-auth-api-openapi.yml",
     "codecombat-clans-api-openapi.yml",
     "codecombat-classrooms-api-openapi.yml",
-    "codecombat-default-api-openapi.yml",
     "codecombat-stats-api-openapi.yml",
     "codecombat-users-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [
-    "codecombat-auth-api-openapi.yml: info.version missing",
-    "codecombat-clans-api-openapi.yml: info.version missing",
-    "codecombat-classrooms-api-openapi.yml: info.version missing",
-    "codecombat-default-api-openapi.yml: info.version missing",
-    "codecombat-stats-api-openapi.yml: info.version missing",
-    "codecombat-users-api-openapi.yml: info.version missing"
+    "codecombat-openapi-original.yml: info.version missing"
   ],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "codecombat-openapi-original.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "codecombat-openapi-original.yml: declared missing tag: ",
+    "codecombat-openapi-original.yml: declared missing tag: Auth",
+    "codecombat-openapi-original.yml: declared missing tag: Clans",
+    "codecombat-openapi-original.yml: declared missing tag: Classrooms",
+    "codecombat-openapi-original.yml: declared missing tag: Stats",
+    "codecombat-openapi-original.yml: declared missing tag: Users",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "codecombat-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codecombat-clans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codecombat-classrooms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codecombat-default-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codecombat-stats-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codecombat-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

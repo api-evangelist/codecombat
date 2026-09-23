@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: CodeCombat Auth Classrooms API
-  version: "1.0"
+  title: CodeCombat Classrooms API
+  version: ''
 servers:
 - url: https://codecombat.com/api
   description: default
@@ -159,9 +159,7 @@ paths:
 
         If the course is paid, user must have an active license.
 
-        User must be a member of the classroom.
-
-        '
+        User must be a member of the classroom.'
       operationId: ClassroomsService.enrollUserInCourse
       tags:
       - Classrooms
@@ -208,9 +206,7 @@ paths:
               - userId
   classrooms/{classroomHandle}/courses/{courseHandle}/remove-enrolled:
     put:
-      description: 'Removes an enrolled user from a course in a classroom.
-
-        '
+      description: Removes an enrolled user from a course in a classroom.
       operationId: ClassroomsService.removeEnrolledUser
       tags:
       - Classrooms
@@ -257,9 +253,7 @@ paths:
               - userId
   classrooms/{classroomHandle}/stats:
     get:
-      description: 'Returns a list of all members stats for the classroom.
-
-        '
+      description: Returns a list of all members stats for the classroom.
       operationId: ClassroomsService.getMembersStats
       tags:
       - Classrooms
@@ -308,9 +302,7 @@ paths:
       - BasicAuth: []
   classrooms/{classroomHandle}/members/{memberHandle}/sessions:
     get:
-      description: 'Returns a list of all levels played by the user for the classroom.
-
-        '
+      description: Returns a list of all levels played by the user for the classroom.
       operationId: ClassroomsService.getLevelsPlayed
       tags:
       - Classrooms
@@ -341,24 +333,26 @@ paths:
       - BasicAuth: []
 components:
   schemas:
-    datetimeString:
-      type: string
-    ClassroomResponseWithCodeCoursesItem:
+    ClassroomResponse:
       type: object
+      description: Subset of properties listed here
       properties:
         _id:
           $ref: '#/components/schemas/objectIdString'
-        levels:
-          type: array
-          items:
-            type: object
-            additionalProperties: {}
-        enrolled:
+        name:
+          type: string
+        members:
           type: array
           items:
             $ref: '#/components/schemas/objectIdString'
-        instance_id:
+        ownerID:
           $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseCoursesItem'
     LevelSessionResponseLevel:
       type: object
       properties:
@@ -391,16 +385,22 @@ components:
             $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
         clanId:
           $ref: '#/components/schemas/objectIdString'
-    ClassroomsGetMembersStatsResponseItemStats:
+    ClassroomResponseWithCodeCoursesItem:
       type: object
       properties:
-        gamesCompleted:
-          type: number
-          format: double
-        playtime:
-          type: number
-          format: double
-          description: Total play time in seconds
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        levels:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        instance_id:
+          $ref: '#/components/schemas/objectIdString'
     LevelSessionResponse:
       type: object
       properties:
@@ -428,40 +428,6 @@ components:
         published:
           type: boolean
           description: For shareable projects. Whether or not the project has been shared with classmates.
-    ClassroomsGetMembersStatsResponseItem:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        stats:
-          $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItemStats'
-    LevelSessionResponseState:
-      type: object
-      properties:
-        complete:
-          type: boolean
-    objectIdString:
-      type: string
-    ClassroomResponse:
-      type: object
-      description: Subset of properties listed here
-      properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        name:
-          type: string
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/objectIdString'
-        ownerID:
-          $ref: '#/components/schemas/objectIdString'
-        description:
-          type: string
-        courses:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClassroomResponseCoursesItem'
     ClassroomResponseCoursesItem:
       type: object
       properties:
@@ -478,12 +444,38 @@ components:
             $ref: '#/components/schemas/objectIdString'
         instance_id:
           $ref: '#/components/schemas/objectIdString'
+    datetimeString:
+      type: string
     ClassroomsCreateRequestAceConfig:
       type: object
       properties:
         language:
           type: string
           description: Programming language for the classroom
+    LevelSessionResponseState:
+      type: object
+      properties:
+        complete:
+          type: boolean
+    ClassroomsGetMembersStatsResponseItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        stats:
+          $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItemStats'
+    ClassroomsGetMembersStatsResponseItemStats:
+      type: object
+      properties:
+        gamesCompleted:
+          type: number
+          format: double
+        playtime:
+          type: number
+          format: double
+          description: Total play time in seconds
+    objectIdString:
+      type: string
   securitySchemes:
     BasicAuth:
       type: http

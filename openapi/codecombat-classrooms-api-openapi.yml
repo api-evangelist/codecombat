@@ -333,74 +333,35 @@ paths:
       - BasicAuth: []
 components:
   schemas:
-    ClassroomResponse:
+    LevelSessionResponseState:
       type: object
-      description: Subset of properties listed here
       properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        name:
-          type: string
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/objectIdString'
-        ownerID:
-          $ref: '#/components/schemas/objectIdString'
-        description:
-          type: string
-        courses:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClassroomResponseCoursesItem'
+        complete:
+          type: boolean
+    datetimeString:
+      type: string
+    ClassroomsGetMembersStatsResponseItemStats:
+      type: object
+      properties:
+        gamesCompleted:
+          type: number
+          format: double
+        playtime:
+          type: number
+          format: double
+          description: Total play time in seconds
     LevelSessionResponseLevel:
       type: object
       properties:
         original:
           type: string
           description: The id for the level.
-    ClassroomResponseWithCode:
-      type: object
-      description: Subset of properties listed here
-      properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        name:
-          type: string
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/objectIdString'
-        ownerID:
-          $ref: '#/components/schemas/objectIdString'
-        description:
-          type: string
-        code:
-          type: string
-        codeCamel:
-          type: string
-        courses:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
-        clanId:
-          $ref: '#/components/schemas/objectIdString'
-    ClassroomResponseWithCodeCoursesItem:
+    ClassroomsCreateRequestAceConfig:
       type: object
       properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        levels:
-          type: array
-          items:
-            type: object
-            additionalProperties: {}
-        enrolled:
-          type: array
-          items:
-            $ref: '#/components/schemas/objectIdString'
-        instance_id:
-          $ref: '#/components/schemas/objectIdString'
+        language:
+          type: string
+          description: Programming language for the classroom
     LevelSessionResponse:
       type: object
       properties:
@@ -428,6 +389,77 @@ components:
         published:
           type: boolean
           description: For shareable projects. Whether or not the project has been shared with classmates.
+    ClassroomResponse:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseCoursesItem'
+    ClassroomResponseWithCodeCoursesItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        levels:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        instance_id:
+          $ref: '#/components/schemas/objectIdString'
+    ClassroomResponseWithCode:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        code:
+          type: string
+        codeCamel:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
+        clanId:
+          $ref: '#/components/schemas/objectIdString'
+    ClassroomsGetMembersStatsResponseItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        stats:
+          $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItemStats'
+    objectIdString:
+      type: string
     ClassroomResponseCoursesItem:
       type: object
       properties:
@@ -444,38 +476,6 @@ components:
             $ref: '#/components/schemas/objectIdString'
         instance_id:
           $ref: '#/components/schemas/objectIdString'
-    datetimeString:
-      type: string
-    ClassroomsCreateRequestAceConfig:
-      type: object
-      properties:
-        language:
-          type: string
-          description: Programming language for the classroom
-    LevelSessionResponseState:
-      type: object
-      properties:
-        complete:
-          type: boolean
-    ClassroomsGetMembersStatsResponseItem:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        stats:
-          $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItemStats'
-    ClassroomsGetMembersStatsResponseItemStats:
-      type: object
-      properties:
-        gamesCompleted:
-          type: number
-          format: double
-        playtime:
-          type: number
-          format: double
-          description: Total play time in seconds
-    objectIdString:
-      type: string
   securitySchemes:
     BasicAuth:
       type: http

@@ -4,14 +4,15 @@
     "_original/codecombat-openapi-original.yml"
   ],
   "outputs": [
-    "codecombat-default-api-openapi.yml",
     "codecombat-auth-api-openapi.yml",
     "codecombat-clans-api-openapi.yml",
     "codecombat-classrooms-api-openapi.yml",
     "codecombat-stats-api-openapi.yml",
     "codecombat-users-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [
     "codecombat-openapi-original.yml: info.version missing"
@@ -19,13 +20,14 @@
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "codecombat-openapi-original.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
-    "codecombat-openapi-original.yml: declared missing tag: ",
+    "codecombat-openapi-original.yml: tagged paths POST users/{handle}/o-auth-identities -> Users",
     "codecombat-openapi-original.yml: declared missing tag: Auth",
     "codecombat-openapi-original.yml: declared missing tag: Clans",
     "codecombat-openapi-original.yml: declared missing tag: Classrooms",
     "codecombat-openapi-original.yml: declared missing tag: Stats",
     "codecombat-openapi-original.yml: declared missing tag: Users",
-    "apis.yml register: already-registered"
+    "superseded outputs removed: codecombat-default-api-openapi.yml",
+    "apis.yml register: written (+0 apis, 5 total)"
   ],
   "skipped": [
     "codecombat-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -8,6 +8,47 @@ servers:
 tags:
 - name: Users
 paths:
+  users/{handle}/o-auth-identities:
+    post:
+      description: 'Adds an OAuth2 identity to the user, so that they can be logged in with that identity. You need to send the OAuth code or the access token to this endpoint. 1. If no access token is provided, it will use your OAuth2 token URL to exchange the given code for an access token. 2. Then it will use the access token (given by you, or received from step 1) to look up the user on your service using the lookup URL, and expects a JSON object in response with an `id` property. 3. It will then save that user `id` to the user in our db as a new OAuthIdentity. In this example, we call your lookup URL (let''s say, `https://oauth.provider/user?t=`) with the access token (`1234`). The lookup URL returns `{ id: ''abcd'' }` in this case, which we save to the user in our db.'
+      operationId: Service.postUsersHandleOAuthIdentities
+      tags:
+      - Users
+      parameters:
+      - name: handle
+        in: path
+        description: The document's `_id` or `slug`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The affected user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Add Oauth2 Identity
+      security:
+      - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider:
+                  type: string
+                  description: Your OAuth Provider ID.
+                accessToken:
+                  type: string
+                  description: Will be passed through your lookup URL to get the user ID. Required if no `code`.
+                code:
+                  type: string
+                  description: Will be passed to the OAuth token endpoint to get a token. Required if no `accessToken`.
+              required:
+              - provider
   users:
     post:
       description: Creates a `User`.
@@ -384,32 +425,23 @@ paths:
       - BasicAuth: []
 components:
   schemas:
-    ClassroomResponseWithCode:
+    datetimeString:
+      type: string
+    UserResponseStats:
       type: object
-      description: Subset of properties listed here
       properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        name:
-          type: string
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/objectIdString'
-        ownerID:
-          $ref: '#/components/schemas/objectIdString'
-        description:
-          type: string
-        code:
-          type: string
-        codeCamel:
-          type: string
-        courses:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
-        clanId:
-          $ref: '#/components/schemas/objectIdString'
+        gamesCompleted:
+          type: number
+          format: double
+        concepts:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        playTime:
+          type: number
+          format: double
+          description: Included only when specifically requested on the endpoint
     UserResponseSubscription:
       type: object
       properties:
@@ -441,45 +473,6 @@ components:
       description: '`"student"` or `"teacher"`. If unset, a home user will be created, unable to join classrooms.
 
         '
-    UsersCreateRequestHeroConfig:
-      type: object
-      properties:
-        thangType:
-          $ref: '#/components/schemas/objectIdString'
-    datetimeString:
-      type: string
-    UserResponseLicense:
-      type: object
-      properties:
-        ends:
-          $ref: '#/components/schemas/datetimeString'
-        active:
-          type: boolean
-    UserResponseOAuthIdentitiesItem:
-      type: object
-      properties:
-        provider:
-          type: string
-        id:
-          type: string
-    roleString:
-      type: string
-      description: Usually either 'teacher' or 'student'
-    UserResponseStats:
-      type: object
-      properties:
-        gamesCompleted:
-          type: number
-          format: double
-        concepts:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-        playTime:
-          type: number
-          format: double
-          description: Included only when specifically requested on the endpoint
     UserResponse:
       type: object
       description: Subset of properties listed here
@@ -504,8 +497,56 @@ components:
           $ref: '#/components/schemas/UserResponseSubscription'
         license:
           $ref: '#/components/schemas/UserResponseLicense'
+    ClassroomResponseWithCode:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        code:
+          type: string
+        codeCamel:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
+        clanId:
+          $ref: '#/components/schemas/objectIdString'
+    roleString:
+      type: string
+      description: Usually either 'teacher' or 'student'
+    UserResponseOAuthIdentitiesItem:
+      type: object
+      properties:
+        provider:
+          type: string
+        id:
+          type: string
+    UserResponseLicense:
+      type: object
+      properties:
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
     objectIdString:
       type: string
+    UsersCreateRequestHeroConfig:
+      type: object
+      properties:
+        thangType:
+          $ref: '#/components/schemas/objectIdString'
   securitySchemes:
     BasicAuth:
       type: http

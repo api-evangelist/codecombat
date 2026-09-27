@@ -93,17 +93,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/codecombat-classrooms-api-openapi.yml
-- aid: codecombat:codecombat-default-api
-  name: CodeCombat Default API
-  description: The Default API from CodeCombat — 1 operation(s) for default.
-  humanURL: https://api-docs.codecombat.com/
-  baseURL: https://codecombat.com/api
-  tags: []
-  tags_raw:
-  - Default
-  properties:
-  - type: OpenAPI
-    url: openapi/codecombat-default-api-openapi.yml
 - aid: codecombat:codecombat-stats-api
   name: CodeCombat Stats API
   description: The Stats API from CodeCombat — 2 operation(s) for stats.

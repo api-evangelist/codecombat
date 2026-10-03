@@ -10,9 +10,7 @@
     "codecombat-stats-api-openapi.yml",
     "codecombat-users-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [
     "codecombat-openapi-original.yml: info.version missing"
@@ -26,14 +24,12 @@
     "codecombat-openapi-original.yml: declared missing tag: Classrooms",
     "codecombat-openapi-original.yml: declared missing tag: Stats",
     "codecombat-openapi-original.yml: declared missing tag: Users",
-    "superseded outputs removed: codecombat-default-api-openapi.yml",
-    "apis.yml register: written (+0 apis, 5 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "codecombat-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codecombat-clans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codecombat-classrooms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "codecombat-default-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codecombat-stats-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codecombat-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]

@@ -45,8 +45,6 @@ paths:
               - userId
 components:
   schemas:
-    objectIdString:
-      type: string
     ClanResponse:
       type: object
       description: Subset of properties listed here
@@ -72,6 +70,8 @@ components:
         metadata:
           type: object
           additionalProperties: {}
+    objectIdString:
+      type: string
   securitySchemes:
     BasicAuth:
       type: http

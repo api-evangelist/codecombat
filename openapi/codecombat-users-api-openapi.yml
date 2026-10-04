@@ -425,11 +425,49 @@ paths:
       - BasicAuth: []
 components:
   schemas:
-    UsersCreateRequestHeroConfig:
+    UserResponseStats:
       type: object
       properties:
-        thangType:
+        gamesCompleted:
+          type: number
+          format: double
+        concepts:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        playTime:
+          type: number
+          format: double
+          description: Included only when specifically requested on the endpoint
+    roleString:
+      type: string
+      description: Usually either 'teacher' or 'student'
+    ClassroomResponseWithCodeCoursesItem:
+      type: object
+      properties:
+        _id:
           $ref: '#/components/schemas/objectIdString'
+        levels:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        instance_id:
+          $ref: '#/components/schemas/objectIdString'
+    objectIdString:
+      type: string
+    UserResponseSubscription:
+      type: object
+      properties:
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
     UserResponseOAuthIdentitiesItem:
       type: object
       properties:
@@ -437,6 +475,14 @@ components:
           type: string
         id:
           type: string
+    UsersCreateRequestRole:
+      type: string
+      enum:
+      - student
+      - teacher
+      description: '`"student"` or `"teacher"`. If unset, a home user will be created, unable to join classrooms.
+
+        '
     UserResponseLicense:
       type: object
       properties:
@@ -470,57 +516,11 @@ components:
           $ref: '#/components/schemas/UserResponseLicense'
     datetimeString:
       type: string
-    UserResponseSubscription:
+    UsersCreateRequestHeroConfig:
       type: object
       properties:
-        ends:
-          $ref: '#/components/schemas/datetimeString'
-        active:
-          type: boolean
-    roleString:
-      type: string
-      description: Usually either 'teacher' or 'student'
-    ClassroomResponseWithCodeCoursesItem:
-      type: object
-      properties:
-        _id:
+        thangType:
           $ref: '#/components/schemas/objectIdString'
-        levels:
-          type: array
-          items:
-            type: object
-            additionalProperties: {}
-        enrolled:
-          type: array
-          items:
-            $ref: '#/components/schemas/objectIdString'
-        instance_id:
-          $ref: '#/components/schemas/objectIdString'
-    UsersCreateRequestRole:
-      type: string
-      enum:
-      - student
-      - teacher
-      description: '`"student"` or `"teacher"`. If unset, a home user will be created, unable to join classrooms.
-
-        '
-    UserResponseStats:
-      type: object
-      properties:
-        gamesCompleted:
-          type: number
-          format: double
-        concepts:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-        playTime:
-          type: number
-          format: double
-          description: Included only when specifically requested on the endpoint
-    objectIdString:
-      type: string
     ClassroomResponseWithCode:
       type: object
       description: Subset of properties listed here

@@ -349,14 +349,6 @@ components:
             $ref: '#/components/schemas/objectIdString'
         instance_id:
           $ref: '#/components/schemas/objectIdString'
-    LevelSessionResponseLevel:
-      type: object
-      properties:
-        original:
-          type: string
-          description: The id for the level.
-    datetimeString:
-      type: string
     ClassroomResponseWithCodeCoursesItem:
       type: object
       properties:
@@ -373,6 +365,47 @@ components:
             $ref: '#/components/schemas/objectIdString'
         instance_id:
           $ref: '#/components/schemas/objectIdString'
+    ClassroomsCreateRequestAceConfig:
+      type: object
+      properties:
+        language:
+          type: string
+          description: Programming language for the classroom
+    objectIdString:
+      type: string
+    ClassroomResponse:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/objectIdString'
+        ownerID:
+          $ref: '#/components/schemas/objectIdString'
+        description:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassroomResponseCoursesItem'
+    LevelSessionResponseLevel:
+      type: object
+      properties:
+        original:
+          type: string
+          description: The id for the level.
+    ClassroomsGetMembersStatsResponseItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        stats:
+          $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItemStats'
     LevelSessionResponseState:
       type: object
       properties:
@@ -405,14 +438,8 @@ components:
         published:
           type: boolean
           description: For shareable projects. Whether or not the project has been shared with classmates.
-    objectIdString:
+    datetimeString:
       type: string
-    ClassroomsCreateRequestAceConfig:
-      type: object
-      properties:
-        language:
-          type: string
-          description: Programming language for the classroom
     ClassroomsGetMembersStatsResponseItemStats:
       type: object
       properties:
@@ -423,26 +450,6 @@ components:
           type: number
           format: double
           description: Total play time in seconds
-    ClassroomResponse:
-      type: object
-      description: Subset of properties listed here
-      properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        name:
-          type: string
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/objectIdString'
-        ownerID:
-          $ref: '#/components/schemas/objectIdString'
-        description:
-          type: string
-        courses:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClassroomResponseCoursesItem'
     ClassroomResponseWithCode:
       type: object
       description: Subset of properties listed here
@@ -469,13 +476,6 @@ components:
             $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
         clanId:
           $ref: '#/components/schemas/objectIdString'
-    ClassroomsGetMembersStatsResponseItem:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        stats:
-          $ref: '#/components/schemas/ClassroomsGetMembersStatsResponseItemStats'
   securitySchemes:
     BasicAuth:
       type: http

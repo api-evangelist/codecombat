@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/codecombat/codecombat-openapi/HEAD/openapi.yml",
+ "requested_url": "https://raw.githubusercontent.com/codecombat/codecombat-openapi/HEAD/openapi.yml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 35979,
+ "sha256": "076a2a5db520bbbe00741337110c3d0a736a31bb9e7b0bcf0b26eb73a1b304ac",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}

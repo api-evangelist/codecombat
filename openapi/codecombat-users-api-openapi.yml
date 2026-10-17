@@ -425,24 +425,32 @@ paths:
       - BasicAuth: []
 components:
   schemas:
-    UserResponseStats:
+    UserResponseSubscription:
       type: object
       properties:
-        gamesCompleted:
-          type: number
-          format: double
-        concepts:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-        playTime:
-          type: number
-          format: double
-          description: Included only when specifically requested on the endpoint
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
+    datetimeString:
+      type: string
+    objectIdString:
+      type: string
     roleString:
       type: string
       description: Usually either 'teacher' or 'student'
+    UsersCreateRequestHeroConfig:
+      type: object
+      properties:
+        thangType:
+          $ref: '#/components/schemas/objectIdString'
+    UserResponseOAuthIdentitiesItem:
+      type: object
+      properties:
+        provider:
+          type: string
+        id:
+          type: string
     ClassroomResponseWithCodeCoursesItem:
       type: object
       properties:
@@ -459,22 +467,6 @@ components:
             $ref: '#/components/schemas/objectIdString'
         instance_id:
           $ref: '#/components/schemas/objectIdString'
-    objectIdString:
-      type: string
-    UserResponseSubscription:
-      type: object
-      properties:
-        ends:
-          $ref: '#/components/schemas/datetimeString'
-        active:
-          type: boolean
-    UserResponseOAuthIdentitiesItem:
-      type: object
-      properties:
-        provider:
-          type: string
-        id:
-          type: string
     UsersCreateRequestRole:
       type: string
       enum:
@@ -483,44 +475,6 @@ components:
       description: '`"student"` or `"teacher"`. If unset, a home user will be created, unable to join classrooms.
 
         '
-    UserResponseLicense:
-      type: object
-      properties:
-        ends:
-          $ref: '#/components/schemas/datetimeString'
-        active:
-          type: boolean
-    UserResponse:
-      type: object
-      description: Subset of properties listed here
-      properties:
-        _id:
-          $ref: '#/components/schemas/objectIdString'
-        email:
-          type: string
-        name:
-          type: string
-        slug:
-          type: string
-        role:
-          $ref: '#/components/schemas/roleString'
-        stats:
-          $ref: '#/components/schemas/UserResponseStats'
-        oAuthIdentities:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserResponseOAuthIdentitiesItem'
-        subscription:
-          $ref: '#/components/schemas/UserResponseSubscription'
-        license:
-          $ref: '#/components/schemas/UserResponseLicense'
-    datetimeString:
-      type: string
-    UsersCreateRequestHeroConfig:
-      type: object
-      properties:
-        thangType:
-          $ref: '#/components/schemas/objectIdString'
     ClassroomResponseWithCode:
       type: object
       description: Subset of properties listed here
@@ -547,6 +501,52 @@ components:
             $ref: '#/components/schemas/ClassroomResponseWithCodeCoursesItem'
         clanId:
           $ref: '#/components/schemas/objectIdString'
+    UserResponse:
+      type: object
+      description: Subset of properties listed here
+      properties:
+        _id:
+          $ref: '#/components/schemas/objectIdString'
+        email:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        role:
+          $ref: '#/components/schemas/roleString'
+        stats:
+          $ref: '#/components/schemas/UserResponseStats'
+        oAuthIdentities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponseOAuthIdentitiesItem'
+        subscription:
+          $ref: '#/components/schemas/UserResponseSubscription'
+        license:
+          $ref: '#/components/schemas/UserResponseLicense'
+    UserResponseStats:
+      type: object
+      properties:
+        gamesCompleted:
+          type: number
+          format: double
+        concepts:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        playTime:
+          type: number
+          format: double
+          description: Included only when specifically requested on the endpoint
+    UserResponseLicense:
+      type: object
+      properties:
+        ends:
+          $ref: '#/components/schemas/datetimeString'
+        active:
+          type: boolean
   securitySchemes:
     BasicAuth:
       type: http

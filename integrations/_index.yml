@@ -16,3 +16,33 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: codecombat-go-module-proxy
+  label: Go module proxy
+  partner_name: Go module proxy
+  category: official SDK (Go)
+  type: register
+  channel: package-registry
+  evidence: https://pkg.go.dev/github.com/codecombat/codecombat-go
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Go module proxy (public registry JSON)
+    spec_file: null
+    language: Go
+    packages:
+    - name: github.com/codecombat/codecombat-go
+      version: v0.1.8
+      released: '2023-08-29'
+      released_field: Time
+      lapsed: true
+      page: https://pkg.go.dev/github.com/codecombat/codecombat-go
+      repo_leg: github-org:codecombat
+      publisher_leg: org:codecombat
+      matched_by: github-org
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null

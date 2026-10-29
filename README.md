@@ -64,6 +64,120 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-CodeCombat is a company surfaced as a portfolio company of a16z, y-combinator and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+CodeCombat is a game-based computer science platform where students learn to code by playing a real programming game, writing Python or JavaScript to control heroes through levels. Its Partner API (a Fern-generated REST API at https://codecombat.com/api, secured with HTTP Basic authentication) lets learning platforms and school districts provision and manage users, create and administer classrooms, enroll students in courses, grant and shorten licenses and Home subscriptions, link OAuth2 SSO identities, manage clans, and pull playtime, license, and per-member progress statistics. CodeCombat is backed by a16z and Y Combinator and publishes official Node, Python, Java, and Go SDKs plus a Postman collection generated from its public OpenAPI description.
 
-Backed by: a16z, y-combinator
+**Areas:** Company · Education · EdTech · Coding · Learning · Classroom · Students · Gamification · SSO · Developer Tools
+
+## CodeCombat on APIs.io
+
+Everything profiled for CodeCombat is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/codecombat/](https://apis.io/providers/codecombat/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [CodeCombat Auth API](https://apis.io/apis/codecombat/codecombat-auth-api/) — The Auth API from CodeCombat — 1 operation(s) for auth.
+- [CodeCombat Clans API](https://apis.io/apis/codecombat/codecombat-clans-api/) — The Clans API from CodeCombat — 1 operation(s) for clans.
+- [CodeCombat Classrooms API](https://apis.io/apis/codecombat/codecombat-classrooms-api/) — The Classrooms API from CodeCombat — 6 operation(s) for classrooms.
+- [CodeCombat Stats API](https://apis.io/apis/codecombat/codecombat-stats-api/) — The Stats API from CodeCombat — 2 operation(s) for stats.
+- [CodeCombat Users API](https://apis.io/apis/codecombat/codecombat-users-api/) — The Users API from CodeCombat — 10 operation(s) for users.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [codecombat](https://apis.io/servers/codecombat/codecombat/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [CodeCombat Auth API](https://apis.io/collections/codecombat/open-codecombat-auth-api/)
+- [CodeCombat Auth Clans API](https://apis.io/collections/codecombat/open-codecombat-clans-api/)
+- [CodeCombat Auth Classrooms API](https://apis.io/collections/codecombat/open-codecombat-classrooms-api/)
+- [CodeCombat Auth  API](https://apis.io/collections/codecombat/open-codecombat-default-api/)
+- [CodeCombat Auth Stats API](https://apis.io/collections/codecombat/open-codecombat-stats-api/)
+- [CodeCombat Auth Users API](https://apis.io/collections/codecombat/open-codecombat-users-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Codecombat Openapi Overlay](https://apis.io/overlays/codecombat/codecombat-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Codecombat Authentication](https://apis.io/security/codecombat/codecombat-authentication/)
+- [Codecombat Domain Security](https://apis.io/security/codecombat/codecombat-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.codecombat.com/)
+- [Documentation](https://api-docs.codecombat.com/)
+- [API reference](https://api-docs.codecombat.com/)
+- [Pricing](https://codecombat.com/pricing)
+- [Support](https://codecombat.com/help)
+- [Blog](https://codecombat.com/blog)
+- [Terms of service](https://codecombat.com/legal)
+- [Privacy policy](https://codecombat.com/privacy)
+- [GitHub](https://github.com/codecombat)
+- [Status](https://status.codecombat.com/)
+
+## API Evangelist rating
+
+**Kin Score 32.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 46.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 25.6 |
+| Access clarity | 21.1 |
+
+**Agent readiness 16.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.5** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/codecombat/](https://apis.io/providers/codecombat/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for CodeCombat: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/codecombat/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
